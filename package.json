@@ -1,7 +1,7 @@
 {
-  "name": "angular.io-example",
-  "version": "0.0.0",
-  "description": "Example project from an angular.io guide.",
+  "name": "webentwicklung",
+  "version": "1.0.0",
+  "description": "This will be a website advertising a holiday flat.",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
