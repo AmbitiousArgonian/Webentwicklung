@@ -4,7 +4,12 @@
   "description": "Development of  a website with the Angular framework. This will be a website advertising a holiday flat.",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "e2e": "ng e2e"
   },
   "repository": {
     "type": "git",
