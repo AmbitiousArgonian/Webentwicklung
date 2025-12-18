@@ -1,0 +1,23 @@
+{
+  "name": "webentwicklung",
+  "version": "1.0.0",
+  "description": "Development of  a website with the Angular framework. This will be a website advertising a holiday flat.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmbitiousArgonian/Webentwicklung.git"
+  },
+  "keywords": [
+    "Angular",
+    "Webentwicklung"
+  ],
+  "author": "AmbitiousArgonian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmbitiousArgonian/Webentwicklung/issues"
+  },
+  "homepage": "https://github.com/AmbitiousArgonian/Webentwicklung#readme"
+}
