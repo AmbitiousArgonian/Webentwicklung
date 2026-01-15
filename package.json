@@ -1,6 +1,8 @@
 {
   "name": "webentwicklung",
   "version": "1.0.0",
+  "type": "module",
+
   "description": "This will be a website advertising a holiday flat.",
   "license": "MIT",
   "scripts": {
@@ -13,22 +15,30 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^16.0.1",
-    "@angular/common": "^16.0.1",
-    "@angular/compiler": "^16.0.1",
-    "@angular/core": "^16.0.1",
-    "@angular/forms": "^16.0.1",
-    "@angular/platform-browser": "^16.0.1",
-    "@angular/platform-browser-dynamic": "^16.0.1",
-    "@angular/router": "^16.0.1",
-    "rxjs": "~7.6.0",
+    "@angular-devkit/build-angular": "^16.2.16",
+    "@angular/animations": "^16.2.12",
+    "@angular/cli": "^16.2.16",
+    "@angular/common": "^16.2.12",
+    "@angular/compiler": "^16.2.12",
+    "@angular/compiler-cli": "^16.2.12",
+    "@angular/core": "^16.2.12",
+    "@angular/forms": "^16.2.12",
+    "@angular/platform-browser": "^16.2.12",
+    "@angular/platform-browser-dynamic": "^16.2.12",
+    "@angular/router": "^16.2.12",
+    "bcryptjs": "^3.0.3",
+    "bootstrap": "^5.3.8",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-session": "^1.18.2",
+    "rxjs": "7.6",
     "tslib": "^2.3.0",
-    "zone.js": "~0.13.0"
+    "zone.js": "^0.13.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^16.0.1",
-    "@angular/cli": "^16.0.1",
-    "@angular/compiler-cli": "^16.0.1",
+    "@prisma/client": "^4.16.2",
     "@types/jasmine": "~4.3.0",
     "@types/node": "^16.11.35",
     "copyfiles": "^2.4.1",
@@ -40,8 +50,9 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "prisma": "^4.16.2",
     "protractor": "~7.0.0",
     "ts-node": "~10.9.0",
-    "typescript": "~5.0.4"
+    "typescript": "5.0"
   }
 }
