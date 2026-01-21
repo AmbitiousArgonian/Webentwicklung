@@ -65,6 +65,12 @@
   );
 }
 
+.header:not(.scrolled) .nav-link,
+.header:not(.scrolled) .logo a {
+  color: white;
+}
+
+
 
 .header.scrolled .logo a {
   transform: scale(0.85);
