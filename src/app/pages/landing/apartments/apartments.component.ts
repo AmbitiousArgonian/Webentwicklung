@@ -12,13 +12,13 @@ export class ApartmentsComponent implements AfterViewInit {
     {
       title: 'Golden Twenties',
       description: 'Eleganz der 1920er Jahre neu interpretiert.',
-      image: 'assets/images/golden-twenties.jpg',
+      image: 'assets/images/landing-golden.jpg',
       route: 'golden-twenties'
     },
     {
       title: 'Martini Racing',
-      description: 'Motorsport-Ikone trifft luxuriöses Design.',
-      image: 'assets/images/martini-racing.jpg',
+      description: 'Motorsport trifft luxuriöses Design.',
+      image: 'assets/images/landing-racing.jpg',
       route: 'martini-racing'
     }
   ];
