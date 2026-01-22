@@ -1,8 +1,10 @@
 import { Component, HostListener, AfterViewInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-apartments',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './apartments.component.html',
   styleUrls: ['./apartments.component.css']
 })
