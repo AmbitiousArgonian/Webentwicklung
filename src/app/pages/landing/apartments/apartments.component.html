@@ -1,0 +1,34 @@
+<section class="apartments">
+  <div class="container">
+
+    <div class="section-header">
+      <h2>Unsere Apartments</h2>
+      <p>Individuelle Themenwelten mit historischem Charakter</p>
+    </div>
+
+    <div class="apartment-grid">
+
+      <div
+        class="apartment-card"
+        *ngFor="let apartment of apartments; let i = index"
+        [class.visible]="visibleCards[i]"
+        (mouseenter)="onHover(i, $event)"
+        (mouseleave)="onLeave(i)"
+      >
+        <div class="image-wrapper">
+          <img [src]="apartment.image" [alt]="apartment.title">
+        </div>
+
+        <div class="card-content">
+          <h3>{{ apartment.title }}</h3>
+          <p>{{ apartment.description }}</p>
+          <a class="card-link" routerLink="/{{ apartment.route }}">
+            Mehr erfahren
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
