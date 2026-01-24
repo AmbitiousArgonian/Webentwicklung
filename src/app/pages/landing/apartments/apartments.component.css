@@ -68,6 +68,9 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 32px;
+  /* Verhindert auseinanderzerren bei sehr großen Bildschirmen */
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 /* Mobile */
@@ -76,4 +79,5 @@
     grid-template-columns: 1fr;
   }
 }
+
 
