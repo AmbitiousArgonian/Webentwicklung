@@ -2,8 +2,8 @@
   padding: 120px 0;
   background: var(--background);
 }
-/* Grid */
-.news-grid {
+/* Grid redudant da jetzt news salider*/
+/*.news-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
@@ -19,9 +19,30 @@
   .news-grid {
     grid-template-columns: 1fr;
   }
+}*/
+
+/* Slider */
+.news-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.slider-window {
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.8s var(--ease-luxury);
+}
+
 /* Card */
 .news-card {
+  min-width: 100%;
   background: white;
   border-radius: 14px;
   overflow: hidden;
@@ -70,3 +91,27 @@
   color: var(--text-secondary);
   font-size: 14px;
 }
+
+/* Navigation Buttons */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  cursor: pointer;
+  font-size: 22px;
+  z-index: 2;
+}
+
+.nav-btn.left  { left: -20px; }
+.nav-btn.right { right: -20px; }
+
+.nav-btn:hover {
+  transform: translateY(-50%) scale(1.05);
+}
+

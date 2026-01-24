@@ -6,23 +6,31 @@
       <p>Aktuelles rund um die Ferienwohnung Mondial</p>
     </div>
 
-    <div class="news-grid">
+    <div class="news-slider">
 
-      <article class="news-card"
-               *ngFor="let item of news; let i = index"
-               [class.visible]="visible[i]">
+      <button class="nav-btn left" (click)="prev()">‹</button>
 
-        <div class="news-image">
-          <img [src]="item.image" [alt]="item.title">
+      <div class="slider-window">
+        <div class="slider-track"
+             [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+
+          <article class="news-card"
+                   *ngFor="let item of news">
+            <div class="news-image">
+              <img [src]="item.image" [alt]="item.title">
+            </div>
+
+            <div class="news-content">
+              <span class="news-date">{{ item.date }}</span>
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.text }}</p>
+            </div>
+          </article>
+
         </div>
+      </div>
 
-        <div class="news-content">
-          <span class="news-date">{{ item.date }}</span>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.text }}</p>
-        </div>
-
-      </article>
+      <button class="nav-btn right" (click)="next()">›</button>
 
     </div>
 

@@ -1,4 +1,4 @@
-import { Component, HostListener, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.css']
 })
-export class NewsComponent implements AfterViewInit {
+export class NewsComponent implements OnInit, OnDestroy {
 
   news = [
     {
@@ -31,26 +31,32 @@ export class NewsComponent implements AfterViewInit {
     }
   ];
 
-  visible: boolean[] = [];
+  currentIndex = 0;
+  intervalId: any;
 
-  ngAfterViewInit() {
-    this.visible = this.news.map(() => false);
-    this.checkVisibility();
+  ngOnInit() {
+    this.startAutoSlide();
   }
 
-  @HostListener('window:scroll')
-  onScroll() {
-    this.checkVisibility();
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
   }
 
-  checkVisibility() {
-    const elements = document.querySelectorAll('.news-card');
-
-    elements.forEach((el, i) => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 120) {
-        this.visible[i] = true;
-      }
-    });
+  startAutoSlide() {
+    this.intervalId = setInterval(() => {
+      this.next();
+    }, 9000); // Wechsel alle 9 Sekunden
   }
+
+  next() { // Manuelles Weiterklicken setzt den Timer zurück
+     clearInterval(this.intervalId);
+     this.currentIndex = (this.currentIndex + 1) % this.news.length;
+     this.startAutoSlide();
+  }
+
+  prev() {
+    this.currentIndex =
+      (this.currentIndex - 1 + this.news.length) % this.news.length;
+  }
+  
 }
