@@ -1,0 +1,30 @@
+<section class="news">
+  <div class="container">
+
+    <div class="section-header">
+      <h2>Neuigkeiten</h2>
+      <p>Aktuelles rund um die Ferienwohnung Mondial</p>
+    </div>
+
+    <div class="news-grid">
+
+      <article class="news-card"
+               *ngFor="let item of news; let i = index"
+               [class.visible]="visible[i]">
+
+        <div class="news-image">
+          <img [src]="item.image" [alt]="item.title">
+        </div>
+
+        <div class="news-content">
+          <span class="news-date">{{ item.date }}</span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.text }}</p>
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+</section>
