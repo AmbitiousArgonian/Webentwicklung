@@ -6,7 +6,9 @@
       <p>Aktuelles rund um die Ferienwohnung Mondial</p>
     </div>
 
-    <div class="news-slider">
+    <div class="news-slider"
+         (mouseenter)="onMouseEnter()"
+         (mouseleave)="onMouseLeave()">
 
       <button class="nav-btn left" (click)="prev()">‹</button>
 

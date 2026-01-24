@@ -60,5 +60,13 @@ export class NewsComponent implements OnInit, OnDestroy {
       (this.currentIndex - 1 + this.news.length) % this.news.length;
     this.startAutoSlide();
   }
+// Pause bei Hover
+  onMouseEnter() {
+    clearInterval(this.intervalId);
+  }
+
+  onMouseLeave() {
+    this.startAutoSlide();
+  }
   
 }
