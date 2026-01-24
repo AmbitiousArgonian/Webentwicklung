@@ -15,7 +15,8 @@
              [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
 
           <article class="news-card"
-                   *ngFor="let item of news">
+                   [class.visible]="i === currentIndex"
+                   *ngFor="let item of news; let i = index">
             <div class="news-image">
               <img [src]="item.image" [alt]="item.title">
             </div>

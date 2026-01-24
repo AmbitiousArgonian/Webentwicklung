@@ -55,8 +55,10 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
   prev() {
+    clearInterval(this.intervalId);
     this.currentIndex =
       (this.currentIndex - 1 + this.news.length) % this.news.length;
+    this.startAutoSlide();
   }
   
 }
