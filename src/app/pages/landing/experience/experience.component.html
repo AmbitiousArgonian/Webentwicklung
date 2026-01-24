@@ -1,0 +1,24 @@
+<section class="experience">
+  <div class="container">
+
+    <div class="section-header">
+      <h2>Ein Aufenthalt mit Charakter</h2>
+      <p>Historische Substanz trifft auf modernen Komfort</p>
+    </div>
+
+    <div class="usp-grid">
+
+      <div class="usp-item"
+           *ngFor="let item of usps; let i = index"
+           [class.visible]="visible[i]">
+        <div class="icon-wrapper">
+          <img [src]="item.icon" [alt]="item.title">
+        </div>
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.text }}</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
