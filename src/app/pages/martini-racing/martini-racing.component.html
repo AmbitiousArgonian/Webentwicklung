@@ -1,4 +1,6 @@
 <section class="hero">
+  <div class="hero__bg" aria-hidden="true"></div>
+
   <div class="hero__inner">
     <p class="hero__kicker">Themen-Apartment</p>
     <h1>Martini Racing</h1>
@@ -20,7 +22,7 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section section--about">
   <h2>Über das Motiv</h2>
   <p>
     Martini Racing steht bei uns für Geschwindigkeit und Präzision – umgesetzt als thematische Gestaltung
@@ -29,8 +31,11 @@
   </p>
 </section>
 
-<section class="section">
-  <h2>Ausstattung</h2>
+<section class="section section--equip">
+  <header class="section-header">
+    <h2>Ausstattung</h2>
+  </header>
+
   <div class="grid">
     <div class="card">
       <h3>Wohnen</h3>
@@ -51,16 +56,9 @@
   </div>
 </section>
 
-<section class="section">
-  <h2>Galerie (Beispiel)</h2>
-  <p class="muted">
-    Hier kannst du später eigene Fotos einbinden. (Keine Kopie des Inspirationsbildes.)
-  </p>
-
-  <div class="gallery">
-    <div class="gallery__item">Foto 1</div>
-    <div class="gallery__item">Foto 2</div>
-    <div class="gallery__item">Foto 3</div>
+<section class="slideshow">
+  <div class="slideshow-frame">
+    <img [src]="currentImage" alt="Martini Racing Bild" class="slideshow-image" />
   </div>
 </section>
 
