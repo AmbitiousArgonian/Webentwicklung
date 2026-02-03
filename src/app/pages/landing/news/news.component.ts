@@ -18,8 +18,8 @@ export class NewsComponent implements OnInit, OnDestroy {
       image: 'assets/images/news1.jpg'
     },
     {
-      title: 'Schönster Wanderweg Deutschlands 2021',
-      text: 'Entdeckt den Teufelsweg, deutschlands schönsten Wanderweg in der Kategorie tagestour.',
+      title: 'Traumschleifen direckt vor der Haustür',
+      text: 'Erleben sie die Premiumwanderwege des Saarlandes. Für Tagestouren ausgelegt, top gepflegt und gut beschildert.',
       date: 'Januar 2026',
       image: 'assets/images/news2.jpg'
     },
