@@ -49,6 +49,7 @@
 
 .usp-item h3 {
   margin-bottom: 8px;
+  white-space: pre-line;
 }
 
 .usp-item p {

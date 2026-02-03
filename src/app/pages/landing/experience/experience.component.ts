@@ -12,19 +12,19 @@ export class ExperienceComponent implements AfterViewInit {
 
   usps = [
     {
-      title: 'Historisches Ambiente',
+      title: 'Historisches\nAmbiente',
       text: 'Sorgfältig restaurierte Architektur mit einzigartigem Flair.'
     },
     {
-      title: 'Modernster Komfort',
+      title: 'Modernster\nKomfort',
       text: 'Hochwertige Ausstattung für entspannte Aufenthalte.'
     },
     {
-      title: 'Zentrale Lage',
+      title: 'Zentrale\nLage',
       text: 'Perfekter Ausgangspunkt für Kultur, Genuss und Erholung.'
     },
     {
-      title: 'Individuelles Design',
+      title: 'Individuelles\nDesign',
       text: 'Jedes Apartment erzählt seine eigene Geschichte.'
     }
   ];
