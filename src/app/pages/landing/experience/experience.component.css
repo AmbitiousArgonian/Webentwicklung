@@ -47,15 +47,6 @@
   transform: translateY(0);
 }
 
-.icon-wrapper {
-  margin-bottom: 16px;
-}
-
-.icon-wrapper img {
-  width: 48px;
-  height: 48px;
-}
-
 .usp-item h3 {
   margin-bottom: 8px;
 }

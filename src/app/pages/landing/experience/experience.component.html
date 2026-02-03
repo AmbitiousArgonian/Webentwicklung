@@ -11,9 +11,6 @@
       <div class="usp-item"
            *ngFor="let item of usps; let i = index"
            [class.visible]="visible[i]">
-        <div class="icon-wrapper">
-          <img [src]="item.icon" [alt]="item.title">
-        </div>
         <h3>{{ item.title }}</h3>
         <p>{{ item.text }}</p>
       </div>
