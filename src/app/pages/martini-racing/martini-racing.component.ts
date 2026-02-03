@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChatWidgetComponent } from '../../shared/chat-widget/chat-widget.component';
+
 
 @Component({
   selector: 'app-martini-racing',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ChatWidgetComponent],
   templateUrl: './martini-racing.component.html',
   styleUrls: ['./martini-racing.component.css']
 })

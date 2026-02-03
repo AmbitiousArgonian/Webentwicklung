@@ -1,0 +1,216 @@
+/* ==========================================================
+   Chat Widget (Martini Racing)
+   Ziel: kleines, fixes Widget im selben Look & Feel wie die Seite.
+   Prinzip: erst Tokens/Defaults, dann Layout, dann Komponenten & States.
+   ========================================================== */
+
+/* Host ist der "Container" des Widgets.
+   Fixed position sorgt dafür, dass der Chat auf jeder Scrollposition sichtbar bleibt. */
+:host {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 9999;
+
+  /* Fallbacks: Das Widget soll auch dann gut aussehen,
+     wenn globale Tokens mal nicht verfügbar sind. */
+  --chat-accent: var(--accent-blue, #1e3a5f);
+  --chat-on-dark: var(--text-on-dark, #ffffff);
+  --chat-text: var(--text, #1a1a1a);
+  --chat-muted: var(--muted, #4b5563);
+
+  --chat-surface: var(--surface, #ffffff);
+  --chat-surface-soft: var(--surface-soft, #f4f6f9);
+  --chat-border: var(--border, #e6e6e6);
+
+  --chat-radius: var(--radius-md, 12px);
+  --chat-shadow-md: var(--shadow-md, 0 10px 28px rgba(0, 0, 0, 0.06));
+  --chat-shadow-lg: var(--shadow-lg, 0 14px 34px rgba(0, 0, 0, 0.10));
+
+  /* Einheitliche Abstände, damit das UI ruhig und konsistent wirkt. */
+  --chat-pad-x: 1rem;
+  --chat-pad-y: 0.85rem;
+  --chat-gap: 0.6rem;
+}
+
+/* -------------------------
+   Floating Action Button
+   Warum: Nutzer soll Chat immer schnell finden, ohne Platz im Layout zu blockieren.
+   ------------------------- */
+.chat-fab {
+  border: 0;
+  cursor: pointer;
+  padding: 0.9rem 1.15rem;
+  border-radius: 999px;
+
+  color: var(--chat-on-dark);
+  background: linear-gradient(135deg, var(--chat-accent), #2b6cb0);
+  box-shadow: var(--chat-shadow-lg);
+
+  font-weight: 650;
+  line-height: 1;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.chat-fab:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--chat-shadow-lg);
+}
+
+/* Sichtbarer Fokus ist wichtig für Tastatur-Navigation (Accessibility). */
+.chat-fab:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px rgba(30, 58, 95, 0.18), var(--chat-shadow-lg);
+}
+
+/* -------------------------
+   Panel Container
+   Warum: begrenzte Breite + max viewport width verhindert Layout-Probleme auf Mobile.
+   ------------------------- */
+.chat-panel {
+  width: min(360px, calc(100vw - 2rem));
+  margin-bottom: 0.75rem;
+
+  border-radius: var(--chat-radius);
+  background: var(--chat-surface);
+  border: 1px solid var(--chat-border);
+  box-shadow: var(--chat-shadow-lg);
+  overflow: hidden;
+}
+
+/* -------------------------
+   Header
+   Warum: klarer Titel + Close-Button oben reduziert kognitive Last.
+   ------------------------- */
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: var(--chat-pad-y) var(--chat-pad-x);
+  background: #0b1c2d;
+  color: var(--chat-on-dark);
+}
+
+.chat-title {
+  font-weight: 650;
+}
+
+.chat-close {
+  border: 0;
+  background: transparent;
+  color: var(--chat-on-dark);
+  cursor: pointer;
+
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0.25rem 0.35rem;
+  border-radius: 8px;
+  transition: background 160ms ease;
+}
+
+.chat-close:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.chat-close:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.18);
+}
+
+/* -------------------------
+   Body (Messages)
+   Warum: max-height + overflow erlaubt viele Nachrichten ohne Layout-Sprung.
+   ------------------------- */
+.chat-body {
+  padding: 0.9rem var(--chat-pad-x);
+  max-height: 260px;
+  overflow: auto;
+}
+
+/* Message Bubble
+   Warum: leichte Rundungen + ruhige Typo wirken modern und lesbar. */
+.msg {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  padding: 0.75rem 0.85rem;
+  border-radius: 12px;
+}
+
+.msg--bot {
+  background: var(--chat-surface-soft);
+  color: var(--chat-text);
+}
+
+/* -------------------------
+   Footer (Input + Button)
+   Warum: Grid hält Input und Button stabil ausgerichtet, auch auf kleinen Screens.
+   ------------------------- */
+.chat-footer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--chat-gap);
+
+  padding: var(--chat-pad-y) var(--chat-pad-x);
+  border-top: 1px solid var(--chat-border);
+  background: var(--chat-surface);
+}
+
+.chat-input {
+  width: 100%;
+  border: 1px solid var(--chat-border);
+  border-radius: 10px;
+  padding: 0.75rem 0.85rem;
+
+  outline: none;
+  color: var(--chat-text);
+  background: var(--chat-surface);
+}
+
+.chat-input::placeholder {
+  color: rgba(75, 85, 99, 0.8);
+}
+
+.chat-input:focus {
+  border-color: rgba(30, 58, 95, 0.45);
+  box-shadow: 0 0 0 4px rgba(30, 58, 95, 0.12);
+}
+
+.chat-send {
+  border: 0;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 0 1rem;
+
+  color: var(--chat-on-dark);
+  background: linear-gradient(135deg, var(--chat-accent), #2b6cb0);
+  font-weight: 650;
+  line-height: 1;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.chat-send:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--chat-shadow-md);
+}
+
+.chat-send:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px rgba(30, 58, 95, 0.18), var(--chat-shadow-md);
+}
+
+/* -------------------------
+   Kurze, nicht-intrusive Bestätigung, dass WhatsApp geöffnet wurde.
+   ------------------------- */
+.chat-hint {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+
+  color: var(--chat-muted);
+  background: var(--chat-surface-soft);
+  border: 1px solid var(--chat-border);
+  border-radius: 10px;
+
+  padding: 0.55rem 0.75rem;
+}
+ 
