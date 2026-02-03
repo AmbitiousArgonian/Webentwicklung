@@ -12,14 +12,14 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   news = [
     {
-      title: 'Shuttelservice Merzig / Türkesmühle',
-      text: 'Jetzt auch bequem mit dem Zug Anreisen. Kostenloser Shuttelservice ab 3 Nächte Aufenthalt.',
+      title: 'Shuttelservice von Merzig Bf / Türkesmühle Bf zur Unterkunft',
+      text: 'Jetzt auch bequem mit dem Zug Anreisen. Kostenloser Shuttelservice ab 3 Nächte Aufenthalt für Hin- und Rückfahrt zum Bahnhof in Türkesmühle oder Merzig. .',
       date: 'Januar 2026',
       image: 'assets/images/news1.jpg'
     },
     {
-      title: 'Bester Wanderweg Deutschlands',
-      text: 'Entdeckt den Teufelspfad, die höchstbepunktete Traumsschleifenpfad in Deutschland',
+      title: 'Schönster Wanderweg Deutschlands 2021',
+      text: 'Entdeckt den Teufelsweg, deutschlands schönsten Wanderweg in der Kategorie tagestour.',
       date: 'Januar 2026',
       image: 'assets/images/news2.jpg'
     },
