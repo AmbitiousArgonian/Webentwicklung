@@ -10,27 +10,35 @@ import { CommonModule } from '@angular/common';
 })
 export class ExperienceComponent implements AfterViewInit {
 
+selectedIndex: number | null = null;
   usps = [
     {
       title: 'Historisches\nAmbiente',
-      text: 'Sorgfältig restaurierte Architektur mit einzigartigem Flair.'
+      image: 'assets/EG-historisch.jpg',
+      longText: 'very long text to test the layout of the experience component in the landing page for the apartments. \n here could be some more text to see how it looks like when there is a lot of text in this section. more text here to fill this section. more. and even more text. finally some line breaks to see how it looks like.'
     },
     {
       title: 'Modernster\nKomfort',
-      text: 'Hochwertige Ausstattung für entspannte Aufenthalte.'
+      text: 'Hochwertige Ausstattung für entspannte Aufenthalte.',
+      image: 'assets/EG-Komfort.jpg',
+      longText: 'Komfort. placeholder long text to test the layout of the experience component in the landing page for the apartments. this shows how the text will look like when expanded.'
     },
     {
       title: 'Zentrale\nLage',
-      text: 'Perfekter Ausgangspunkt für Kultur, Genuss und Erholung.'
+      image: 'assets/Mondial-lage.jpg',
+      longText: 'Lage. placeholder long text to test the layout of the experience component in the landing page for the apartments'
     },
     {
       title: 'Individuelles\nDesign',
-      text: 'Jedes Apartment erzählt seine eigene Geschichte.'
+      image: 'assets/Mondial-design.jpg',
+      longText: 'Design. very long text to test the layout of the experience component in the landing page for the apartments'
     }
   ];
-
-  visible: boolean[] = [];
-
+select(index: number) {
+  this.selectedIndex = this.selectedIndex === index ? null : index;
+ 
+}
+visible: boolean[] = [];
   ngAfterViewInit() {
     this.visible = this.usps.map(() => false);
     this.checkVisibility();
