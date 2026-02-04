@@ -27,7 +27,7 @@ export class NewsComponent implements OnInit, OnDestroy {
       title: 'Hier könnte ihre Werbung stehen',
       text: 'Wirklich, das hier ist Freitext der in Produktivbetrieb mit was sinnvollen gefüllt wird.',
       date: 'November 1987',
-      image: 'assets/news3.jpg'
+      image: 'assets/Werbung.jpg'
     }
   ];
 
