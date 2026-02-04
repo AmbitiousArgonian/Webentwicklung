@@ -1,3 +1,4 @@
+
 <section class="hero">
     <div class="hero__inner">
         <p class="hero__kicker">Themen-Apartment</p>
@@ -5,11 +6,6 @@
         <p class="hero__subtitle">
             Glamour, Gold und der unverwechselbare Stil der 1920er Jahre – erleben Sie ein Ambiente voller Eleganz.
         </p>
-
-        <div class="hero__actions">
-            <a class="btn btn--primary" href="/booking">Jetzt Verfügbarkeit prüfen</a>
-            <a class="btn btn--ghost" href="/dashboard">Zur Übersicht</a>
-        </div>
 
         <ul class="hero__facts">
             <li><strong>2–4</strong> Personen</li>
@@ -23,31 +19,12 @@
 <section class="section">
     <h2>Über das Motiv</h2>
     <p>
-        Die Golden Twenties Suite verbindet Art‑Déco‑Design, luxuriöse Stoffe und warme Goldakzente.
-        Ein Raum, der den Charme der 1920er Jahre wieder aufleben lässt.
-    </p>
-</section>
+        Die Golden Twenties Suite ist eine Hommage an die glamourösen 1920er Jahre.
+        Edles Art-Déco-Design, luxuriöse Stoffe und warme Goldakzente schaffen eine
+        stilvolle Atmosphäre voller Eleganz und zeitlosem Charme.
+        Ein Raum, der Geschichte spürbar macht – modern interpretiert.
 
-<section class="section">
-    <h2>Ausstattung</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>Wohnen</h3>
-            <p>Elegante Sitzmöbel, Vintage‑Dekor, warmes Lichtkonzept.</p>
-        </div>
-        <div class="card">
-            <h3>Schlafen</h3>
-            <p>Komfortables Bett, hochwertige Stoffe, ruhige Atmosphäre.</p>
-        </div>
-        <div class="card">
-            <h3>Küche</h3>
-            <p>Kaffeemaschine, Kochfeld, Kühlschrank, Grundausstattung.</p>
-        </div>
-        <div class="card">
-            <h3>Bad</h3>
-            <p>Dusche, Handtücher, Föhn und Pflegeprodukte.</p>
-        </div>
-    </div>
+    </p>
 </section>
 
 <section class="slideshow">
@@ -56,11 +33,109 @@
     </div>
 </section>
 
+<section class="amenities">
+    <h2 class="amenities-title">Ausstattung</h2>
 
+    <!-- Verfügbare Leistungen (immer sichtbar) -->
+    <h3 class="amenities-subtitle">Verfügbare Leistungen</h3>
+    <div class="amenities-list">
+        <div class="amenity"><span class="material-icons">pets</span> Haustier erlaubt</div>
+        <div class="amenity"><span class="material-icons">tv</span> TV</div>
+        <div class="amenity"><span class="material-icons">local_fire_department</span> Kamin/Ofen</div>
+        <div class="amenity"><span class="material-icons">microwave</span> Mikrowelle</div>
+        <div class="amenity"><span class="material-icons">smoke_free</span> Nichtraucher</div>
+        <div class="amenity"><span class="material-icons">restaurant</span> Küche</div>
+        <div class="amenity"><span class="material-icons">outdoor_grill</span> Grill</div>
+        <div class="amenity"><span class="material-icons">coffee</span> Kaffeemaschine</div>
+        <div class="amenity"><span class="material-icons">device_thermostat</span> Heizung</div>
+        <div class="amenity"><span class="material-icons">kitchen</span> Kühlschrank</div>
+        <div class="amenity"><span class="material-icons">ac_unit</span> Gefrierfach</div>
+        <div class="amenity"><span class="material-icons">radio</span> Radio</div>
+        <div class="amenity"><span class="material-icons">local_parking</span> Parken</div>
+        <div class="amenity"><span class="material-icons">notifications</span> Rauchmelder</div>
+        <div class="amenity"><span class="material-icons">fence</span> Umzäunt</div>
+
+
+    </div>
+
+    <!-- Zusätzliche Ausstattungen (werden erst nach Klick angezeigt) -->
+    <h3 class="amenities-subtitle" *ngIf="showAllAmenities">Zusätzliche Ausstattungen</h3>
+    <div class="amenities-list" *ngIf="showAllAmenities">
+
+        <div class="amenity"><span class="material-icons">landscape</span> Außenbereiche</div>
+        <div class="amenity"><span class="material-icons">deck</span> Terrasse/Balkon</div>
+        <div class="amenity"><span class="material-icons">park</span> Garten</div>
+        <div class="amenity"><span class="material-icons">waves</span> Grundstück am Wasser: 2000 m²</div>
+        <div class="amenity"><span class="material-icons">fence</span> Eingezäunter Garten</div>
+        <div class="amenity"><span class="material-icons">chair</span> Gartenmöbel</div>
+        <div class="amenity"><span class="material-icons">water</span> Warm-/Kaltwasser in der Küche</div>
+        <div class="amenity"><span class="material-icons">kitchen</span> Kühlschrank</div>
+        <div class="amenity"><span class="material-icons">air</span> Dunstabzug</div>
+        <div class="amenity"><span class="material-icons">ac_unit</span> Gefrierfach</div>
+        <div class="amenity"><span class="material-icons">notifications</span> Rauchmelder</div>
+    </div>
+
+
+    <button class="more-btn" *ngIf="!showAllAmenities" (click)="toggleAmenities()">
+        Mehr anzeigen
+    </button>
+</section>
+
+
+
+<section class="section location-section">
+    <h2>Lage</h2>
+
+    <div class="location-grid">
+        <div class="location-info">
+            <h3>In der Nähe</h3>
+            <ul>
+                <li>Angelmöglichkeit</li>
+                <li>250 m zum Wasser</li>
+                <li>3,1 km zum Zentrum</li>
+            </ul>
+        </div>
+
+        <div class="location-map">
+            <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2513.123456789!2d7.000000!3d49.350000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4795b123456789ab%3A0xabcdef1234567890!2sNeunkirchen%2C%20Saarland!5e0!3m2!1sde!2sde!4v1700000000000"
+                    width="100%"
+                    height="300"
+                    style="border:0; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+        </div>
+    </div>
+</section>
 
 <section class="section section--cta">
     <h2>Bereit für das Golden‑Twenties‑Erlebnis?</h2>
     <p>Wählen Sie Ihren Zeitraum und tauchen Sie ein in die Welt der 1920er Jahre.</p>
-    <a class="btn btn--primary" href="/booking">Buchen</a>
+
+
+    <!-- Kalender öffnen -->
+    <button class="btn-calendar" (click)="openCalendar()">
+        Verfügbarkeit prüfen
+    </button>
+
+    <!-- Kalender Modal -->
+    <div class="calendar-modal" *ngIf="calendarOpen">
+        <div class="calendar-backdrop" (click)="closeCalendar()"></div>
+
+        <div class="calendar-container">
+<!--            <h2>Verfügbarkeit</h2>-->
+
+            <app-booking-calendar></app-booking-calendar>
+
+
+            <button class="btn-calendar" onclick="window.location.href='/login'">
+                Buchen
+            </button>
+
+        </div>
+    </div>
+
 </section>
 

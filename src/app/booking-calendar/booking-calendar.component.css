@@ -1,0 +1,122 @@
+.calendar-wrapper {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+  width: 100%;
+  max-width: 420px;
+  margin: auto;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.calendar-header button {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.weekday {
+  text-align: center;
+  font-weight: 600;
+  color: #666;
+}
+
+.day {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+/* Nicht klickbare Felder */
+.day.empty {
+  background: transparent;
+  cursor: default;
+}
+
+/* Vergangene Tage */
+.day.past {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Gebuchte Tage */
+.day.booked {
+  background: #ffdddd;
+  color: #a00;
+  pointer-events: none;
+}
+
+/* Ausgewählter Start- oder Endtag */
+.day.selected {
+  background: #c6a75e;
+  color: #fff;
+  font-weight: 600;
+  border: 2px solid #1c1c1c;
+  box-shadow: 0 0 4px rgba(0,0,0,0.25);
+}
+
+
+/* Tage zwischen Start und Ende */
+.day.range { background: rgba(198, 167, 94, 0.55) !important; color: #1c1c1c !important;}
+
+/* Hover-Effekt */
+.day:not(.booked):not(.past):hover {
+  background: rgba(198,167,94,0.15);
+}
+
+/* Footer */
+.calendar-footer {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.btn-book {
+  background: var(--accent-dark);
+  color: #fff;
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-book:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Gebuchte Tage (rot) — nur Farbe, keine Layoutänderung */
+.day.booked {
+  background: #ffdede; /* hellrot Hintergrund */
+  color: #a00000;      /* dunkles Rot für Text */
+  border: 1px solid #d46; /* dezenter Rand */
+  pointer-events: none; /* bleibt nicht anklickbar wie vorher */
+}
+
+/* Verfügbare Tage (grün) — nur Farbe, keine Layoutänderung */
+.day.available {
+  background: #e8f8ea; /* hellgrün Hintergrund */
+  color: #0b6b0b;      /* dunkles Grün für Text */
+  border: 1px solid #2e8b2e;
+}
+
+/* Hover nur für verfügbare Tage (leicht stärkerer Effekt) */
+.day.available:hover {
+  background: #7ccf7c;
+}

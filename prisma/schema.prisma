@@ -12,3 +12,11 @@ model User {
   email    String  @unique
   password String
 }
+model Booking {
+  id          String   @id @default(uuid())
+  apartmentId String
+  userId      String
+  startDate   DateTime
+  endDate     DateTime
+  createdAt   DateTime @default(now())
+}
