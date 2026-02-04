@@ -18,7 +18,7 @@ export class HeroComponent {
     this.scrollY = window.scrollY;
   }
 
-  scrollToExperience() {
-    this.viewportScroller.scrollToAnchor('experience');
+  scrollToApartments() {
+    this.viewportScroller.scrollToAnchor('apartments');
   }
 }
