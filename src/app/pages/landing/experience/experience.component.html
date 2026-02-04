@@ -1,0 +1,37 @@
+<section class="experience" id="experience">
+  <div class="container">
+
+    <div class="section-header">
+      <h2>Ein Aufenthalt mit Charakter</h2>
+      <p>Historische Substanz trifft auf modernen Komfort</p>
+    </div>
+
+<div class="usp-grid">
+
+  <div class="usp-item"
+       *ngFor="let item of usps; let i = index"
+       (click)="select(i)"
+       [class.active]="selectedIndex === i">
+
+    <div class="usp-bg"
+         [style.backgroundImage]="'url(' + item.image + ')'">
+
+      <div class="usp-overlay">
+        <span>Erfahre mehr</span>
+      </div>
+
+      <h3>{{ item.title }}</h3>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="usp-detail" *ngIf="selectedIndex !== null">
+  <p>{{ usps[selectedIndex!].longText }}</p>
+</div>
+
+
+  </div>
+</section>
