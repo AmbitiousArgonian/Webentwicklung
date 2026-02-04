@@ -9,7 +9,16 @@ import { HomeComponent } from './pages/home/home.component';
 
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
+  // Startseite soll home sein
+  { path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'},
+
+  // Home-Seite
+  { path: 'home',
+    component: HomeComponent },
+
+  
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: DashboardComponent },
@@ -18,6 +27,6 @@ export const routes: Routes = [
   { path: 'martini-racing', component: MartiniRacingComponent },
   { path: 'golden-twenties', component: GoldenTwentiesDetailComponent },
 
-  { path: '**', redirectTo: 'login' }
+  { path: '**', redirectTo: 'login' } // Hier wird die 404 Seite verlinkt
 ];
 
