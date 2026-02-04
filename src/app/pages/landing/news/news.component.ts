@@ -15,13 +15,13 @@ export class NewsComponent implements OnInit, OnDestroy {
       title: 'Shuttelservice von Merzig Bf / Türkesmühle Bf zur Unterkunft',
       text: 'Jetzt auch bequem mit dem Zug Anreisen. Kostenloser Shuttelservice ab 3 Nächte Aufenthalt für Hin- und Rückfahrt zum Bahnhof in Türkesmühle oder Merzig. .',
       date: 'Januar 2026',
-      image: 'assets/images/news1.jpg'
+      image: 'assets/images/Shuttle.jpg'
     },
     {
       title: 'Traumschleifen direckt vor der Haustür',
       text: 'Erleben sie die Premiumwanderwege des Saarlandes. Für Tagestouren ausgelegt, top gepflegt und gut beschildert.',
       date: 'Januar 2026',
-      image: 'assets/images/news2.jpg'
+      image: 'assets/images/Landschaft.jpg'
     },
     {
       title: 'Hier könnte ihre Werbung stehen',
