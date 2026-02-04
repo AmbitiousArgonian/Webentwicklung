@@ -1,0 +1,33 @@
+<button class="chat-fab" type="button" (click)="toggle()" *ngIf="!isOpen">
+  Chat
+</button>
+
+<div class="chat-panel" *ngIf="isOpen">
+  <div class="chat-header">
+    <div class="chat-title">Kontakt</div>
+    <button class="chat-close" type="button" (click)="toggle()">✕</button>
+  </div>
+
+  <div class="chat-body">
+    <div class="msg msg--bot">
+      Hi! 👋 Schreib uns deine Frage zur Ferienwohnung.
+    </div>
+  </div>
+
+  <div class="chat-hint" *ngIf="justSent">
+    WhatsApp wurde geöffnet ✅
+  </div>
+
+  <div class="chat-footer">
+    <input
+      class="chat-input"
+      type="text"
+      placeholder="Nachricht eingeben…"
+      [(ngModel)]="message"
+      (keydown.enter)="send()"
+    />
+    <button class="chat-send" type="button" (click)="send()">
+      Senden
+    </button>
+  </div>
+</div>
