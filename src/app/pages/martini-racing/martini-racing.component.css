@@ -1,13 +1,62 @@
+/* =========================
+   Martini Racing – Design Tokens
+   ========================= */
+:host {
+  --text-on-dark: #ffffff;
+  --text: #1a1a1a;
+  --muted: #4b5563;
+
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-soft: #f4f6f9;
+  --border: #e6e6e6;
+
+  --accent-blue: #1e3a5f;
+  --accent-red: #e63946;
+
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 14px 34px rgba(0, 0, 0, 0.10);
+
+  --container: 1100px;
+  --pad-x: 2rem;
+}
+
+/* =========================
+   Hero (Blurred Background)
+   ========================= */
 .hero {
+  position: relative;
   min-height: 70vh;
   display: flex;
   align-items: center;
-  padding: 4rem 2rem;
-  background: linear-gradient(135deg, #0b1c2d, #1e3a5f);
-  color: white;
+  padding: 4rem var(--pad-x);
+  color: var(--text-on-dark);
+  overflow: hidden;
 }
 
+/* Unscharfer Hintergrund */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    url('/assets/images/martini-racing/banner.png');
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px);
+  transform: scale(1.08);
+  z-index: 0;
+}
+
+/* Scharfer Inhalt */
 .hero__inner {
+  position: relative;
+  z-index: 1;
   max-width: 900px;
 }
 
@@ -15,88 +64,198 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 0.9rem;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .hero h1 {
   font-size: 3rem;
+  line-height: 1.1;
   margin: 0.5rem 0;
 }
 
 .hero__subtitle {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   max-width: 600px;
   margin-bottom: 2rem;
+  opacity: 0.95;
 }
 
 .hero__actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
+/* =========================
+   Buttons
+   ========================= */
 .btn {
-  padding: 0.8rem 1.6rem;
-  border-radius: 6px;
+  padding: 0.85rem 1.6rem;
+  border-radius: 8px;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 650;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
 }
 
 .btn--primary {
-  background: #0d6efd;
-  color: white;
+  color: var(--text-on-dark);
+  background: linear-gradient(135deg, var(--accent-blue), #2b6cb0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn--primary:hover {
+  box-shadow: var(--shadow-lg);
 }
 
 .btn--ghost {
-  border: 2px solid white;
-  color: white;
+  color: var(--text-on-dark);
+  border: 2px solid rgba(255,255,255,0.9);
+  background: transparent;
 }
 
+.btn--ghost:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+/* =========================
+   Hero Facts
+   ========================= */
 .hero__facts {
   display: flex;
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
   list-style: none;
   padding: 0;
-  margin-top: 1rem;
+  margin: 1rem 0 0;
 }
 
+/* =========================
+   Sections
+   ========================= */
 .section {
-  padding: 3rem 2rem;
-  max-width: 1100px;
-  margin: auto;
+  padding: 3rem var(--pad-x);
+  max-width: var(--container);
+  margin: 0 auto;
+  color: var(--text);
 }
 
+.section p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* Über das Motiv – Card-Style */
+.section--about {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 6px solid var(--accent-blue);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+/* Ausstattung – eingebetteter Bereich */
+.section--equip {
+  background: var(--surface-soft);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  margin-top: 3rem;
+}
+
+.section--equip h2 {
+  font-weight: 650;
+  margin-bottom: 2rem;
+}
+
+/* =========================
+   Grid & Cards
+   ========================= */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
-  margin-top: 1.5rem;
 }
 
 .card {
   padding: 1.5rem;
-  border-radius: 10px;
-  background: #f5f5f5;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 6px solid var(--accent-blue);
+  box-shadow: var(--shadow-sm);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-left-color 180ms ease;
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-top: 1rem;
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-left-color: var(--accent-red);
 }
 
-.gallery__item {
-  background: #ddd;
-  height: 140px;
+/* =========================
+   Slideshow
+   ========================= */
+.slideshow {
+  padding: 3rem var(--pad-x);
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-weight: 600;
 }
 
+.slideshow-frame {
+  width: 100%;
+  max-width: var(--container);
+  height: 500px;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  background: #0b1c2d;
+}
+
+.slideshow-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================
+   CTA
+   ========================= */
 .section--cta {
   text-align: center;
   background: #0b1c2d;
-  color: white;
+  color: var(--text-on-dark);
+  border-radius: var(--radius-lg);
+  max-width: var(--container);
+  margin: 3rem auto;
+  padding: 3rem 2rem;
+}
+
+/* =========================
+   Responsive
+   ========================= */
+@media (max-width: 640px) {
+  .hero {
+    padding: 3rem 1.25rem;
+  }
+
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .section {
+    padding: 2.25rem 1.25rem;
+  }
+
+  .slideshow-frame {
+    height: 320px;
+  }
+
+  .section--equip {
+    padding: 2.25rem 1.25rem;
+  }
 }

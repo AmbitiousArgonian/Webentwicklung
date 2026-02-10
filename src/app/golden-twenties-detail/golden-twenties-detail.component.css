@@ -1,161 +1,540 @@
-/* Hero Section */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ===============================
+   ROOT / TOKENS
+================================ */
+:root {
+  --bg-main: #f6f6f4;
+  --bg-card: #ffffff;
+
+  --text-main: #1c1c1c;
+  --text-soft: #6f6f6f;
+
+  --accent-gold: #c6a75e;
+  --accent-dark: #2b2b2b;
+
+  --radius-lg: 20px;
+  --radius-md: 14px;
+
+  --shadow-soft: 0 10px 40px rgba(0,0,0,0.06);
+  --shadow-hover: 0 18px 60px rgba(0,0,0,0.10);
+}
+
+/* ===============================
+   BASE
+================================ */
+body {
+  margin: 0;
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.7;
+}
+
+h1, h2, h3 {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.08em;
+}
+
+p {
+  color: var(--text-soft);
+}
+
+/* ===============================
+   HERO
+================================ */
 .hero {
   position: relative;
-  min-height: 60vh;
+  min-height: 70vh;
   display: flex;
   align-items: center;
-  padding: 4rem 2rem;
-  color: #1b1b1b; /* dunkler Text, weil Hintergrund hell wird */
+  padding: 6rem 2rem;
   text-align: center;
-
-  /* Hintergrundbild */
   background-image: url('/assets/images/IMG-20220510-WA0004.jpg');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
 }
 
-/* Heller Overlay-Effekt */
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.20); /* Heller Schleier */
-  backdrop-filter: blur(5px);            /* Weichzeichnen */
-  z-index: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.45),
+    rgba(0,0,0,0.25)
+  );
 }
 
 .hero__inner {
   position: relative;
-  z-index: 1; /* Text über dem Overlay */
+  max-width: 900px;
+  margin: auto;
+  color: #ffffff;
 }
-
 
 .hero__kicker {
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 0.9rem;
-  color: #d4af37;
+  letter-spacing: 3px;
+  font-size: 0.75rem;
+  color: var(--accent-gold);
 }
 
 .hero h1 {
-  font-family: 'Cinzel', serif;
-  font-size: 3rem;
-  margin: 0.5rem 0;
-  color: #4a2e1a;
-  letter-spacing: 0.1em;
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  margin: 1rem 0;
 }
 
 .hero__subtitle {
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  max-width: 640px;
+  margin: 0 auto 3rem;
+  color: rgba(255,255,255,0.85);
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+.btn {
+  padding: 0.9rem 2.4rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  display: inline-block;
+}
+
+.btn--primary {
+  background: var(--accent-gold);
+  color: #1c1c1c;
+}
+
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(198,167,94,0.35);
+}
+
+.btn--ghost {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.45);
+  color: #ffffff;
+}
+
+.btn--ghost:hover {
+  background: rgba(255,255,255,0.25);
 }
 
 .hero__actions {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.btn {
-  padding: 0.8rem 1.6rem;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.btn--primary {
- background: #4a2e1a;
-  color: #f5e6c8;
-}
-
-.btn--ghost {
-  border: 2px solid #4a2e1a;
-  color: #4a2e1a;
-}
-
+/* ===============================
+   FACTS
+================================ */
 .hero__facts {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
+  justify-content: center;
   list-style: none;
   padding: 0;
-  margin-top: 1rem;
+  margin-top: 3rem;
 }
 
-/* Sections */
+/* ===============================
+   SECTIONS
+================================ */
 .section {
-  padding: 3rem 2rem;
   max-width: 1100px;
-  margin: 2rem auto;
-  background: #f8e9d2;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.15);
-  color: #3a2415;
-  font-family: 'Cormorant Garamond', serif;
+  margin: 6rem auto;
+  padding: 0 2rem;
 }
 
+.section h2 {
+  text-align: center;
+  font-size: 2.2rem;
+}
 
-/* Grid */
+/* ===============================
+   GRID / CARDS
+================================ */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
 }
 
 .card {
-  padding: 1.5rem;
-  border-radius: 10px;
-  background: #fff;
-  border: 2px solid #d4af37;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-soft);
+  transition: 0.3s;
 }
 
-/* Gallery */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-top: 1rem;
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
 }
 
-.gallery img {
-  width: 100%;
-  border-radius: 8px;
-  border: 3px solid #d4af37;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-}
-
-/* CTA */
-.section--cta {
-  text-align: center;
-  background: #1b1b1b;
-  color: #f5e6c8;
-}
-
+/* ===============================
+   SLIDESHOW
+================================ */
 .slideshow {
-  width: 100%;
-  max-width: 600px;       /* kompakter */
-  margin: 2rem auto;
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 0 2rem;
 }
 
 .slideshow-frame {
-  width: 100%;
-  height: 350px;          /* feste Höhe für alle Bilder */
-  border-radius: 10px;
+  height: 420px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  background: #000;       /* neutraler Hintergrund */
+  box-shadow: var(--shadow-soft);
+}
+
+.slideshow-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===============================
+   CTA SECTION (Überschrift + Intro)
+================================ */
+.section--cta {
+  background: #ffffff;
+  padding: 5rem 2rem;
+  text-align: center;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.section--cta h2 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+  color: var(--text-main);
+}
+
+.section--cta p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  color: var(--text-soft);
+}
+
+/* ===============================
+   BOOKING CARD
+================================ */
+.booking-section {
+  max-width: 720px;
+  margin: 3rem auto;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  box-shadow: var(--shadow-soft);
+  text-align: left;
+}
+
+.booking-section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--text-main);
+}
+
+/* ===============================
+   FORM FIELDS
+================================ */
+.booking-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.field label {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-soft);
+  margin-bottom: 0.5rem;
+}
+
+.input-icon {
+  position: relative;
+}
+
+.input-icon input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 2.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  background: #f3f3f3;
+  color: var(--text-main);
+}
+
+.input-icon .material-icons {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent-gold);
+  font-size: 20px;
+}
+
+/* ===============================
+   GUESTS SLIDER
+================================ */
+.field.guests label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-soft);
+}
+
+.field.guests input[type="range"] {
+  width: 100%;
+  margin-top: 0.8rem;
+  accent-color: var(--accent-dark);
+}
+
+/* ===============================
+   BOOKING BUTTON
+================================ */
+.btn-booking {
+  margin-top: 2.5rem;
+  width: 100%;
+  background: var(--accent-dark);
+  color: #ffffff;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.btn-booking:hover {
+  background: #000;
+  transform: translateY(-2px);
+}
+
+/* ===============================
+   PRICE + PAYMENT INFO
+================================ */
+.price-note,
+.payment-note {
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--text-soft);
+}
+
+.payment-method {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* ===============================
+   CALENDAR BUTTON
+================================ */
+.btn-calendar {
+  margin-top: 2rem;
+  background: var(--accent-gold);
+  color: #1c1c1c;
+  padding: 1rem 2.5rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.btn-calendar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(198,167,94,0.35);
+}
+
+
+.field-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-soft);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.field input {
+  width: 100%;
+  background: #f3f3f3;
+  border: none;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+}
+
+.guests-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f3f3f3;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-md);
+}
+
+.guests-inline button {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.btn-booking {
+  margin-top: 2rem;
+  background: var(--accent-dark);
+  color: #ffffff;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.btn-booking:hover {
+  background: #000000;
+}
+
+.amenities {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.amenities h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #1a1a1a;
+    text-align: center;
+}
+
+.amenities-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px 40px;
+
+}
+
+.amenities-subtitle {
+  font-size: 1.4rem;
+  margin: 2rem 0 1rem;
+  color: #444;
+  text-align: center;
+}
+
+
+.amenity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    color: #222;
+    line-height: 1.4;
+}
+
+.amenity span {
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+    opacity: 0.9;
+}
+
+.hidden {
+    display: none;
+}
+
+.more-btn {
+    margin-top: 20px;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 15px;
+    color: #0066cc;
+    cursor: pointer;
+}
+
+
+.location-section {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  padding: 2.5rem;
+  margin-top: 3rem;
+  font-family: 'Inter', sans-serif;
+  color: #222;
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.location-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+.location-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.location-info li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+.location-map {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Bilder leicht gezoomt und einheitlich */
-.slideshow-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;       /* füllt den Rahmen, zoomt leicht */
-  object-position: center; /* zentriert das Bild */
-  transition: opacity 1s ease-in-out;
+.map-placeholder {
+  background: #f2f2f2;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: inset 0 0 0 1px #ddd;
 }
 
+.btn-map {
+  margin-top: 1rem;
+  background: #0071c2;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-map:hover {
+  background: #005a9e;
+}
+
+@media (max-width: 768px) {
+  .location-grid {
+    grid-template-columns: 1fr;
+  }
+}
