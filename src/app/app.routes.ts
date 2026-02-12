@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MartiniRacingComponent } from './pages/martini-racing/martini-racing.component';
 import { GoldenTwentiesDetailComponent } from './golden-twenties-detail/golden-twenties-detail.component';
 import { HomeComponent } from './pages/home/home.component';
+import { goldenComponent } from './pages/golden/golden.component';
 
 
 
@@ -25,7 +26,7 @@ export const routes: Routes = [
 
   // Themen-Apartments
   { path: 'martini-racing', component: MartiniRacingComponent },
-  { path: 'golden-twenties', component: GoldenTwentiesDetailComponent },
+  { path: 'golden-twenties', component: goldenComponent },
 
   { path: '**', redirectTo: 'login' } // Hier wird die 404 Seite verlinkt
 ];
