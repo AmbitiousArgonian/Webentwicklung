@@ -1,0 +1,60 @@
+.booking-hero {
+  padding: 140px 24px 80px;
+  text-align: center;
+  background: var(--background);
+}
+
+.booking-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 24px 100px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+input, select, textarea {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+button {
+  padding: 14px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.checkbox {
+  font-size: 14px;
+  display: flex;
+  gap: 8px;
+}
+
+.honeypot {
+  display: none;
+}
+
+.success {
+  margin-top: 40px;
+  text-align: center;
+  color: var(--primary);
+}

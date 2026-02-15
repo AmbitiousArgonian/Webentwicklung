@@ -5,6 +5,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { racingComponent } from './pages/racing/racing.component';
 import { HomeComponent } from './pages/home/home.component';
 import { goldenComponent } from './pages/golden/golden.component';
+import { BookingComponent } from './pages/booking/booking.component';
+
 
 
 
@@ -27,6 +29,10 @@ export const routes: Routes = [
   { path: 'martini-racing', component: racingComponent },
   { path: 'golden-twenties', component: goldenComponent },
 
-  { path: '**', redirectTo: 'login' } // Hier wird die 404 Seite verlinkt
+  // Buchungsseite
+   { path: 'booking', component: BookingComponent },
+
+  // todo 404 Seite
+  { path: '**', redirectTo: 'login' } 
 ];
 

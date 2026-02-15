@@ -1,0 +1,72 @@
+<app-navbar></app-navbar>
+
+<section class="booking-hero">
+  <h1>Buchungsanfrage stellen</h1>
+  <p>Unverbindliche Anfrage – wir melden uns innerhalb von 48 Stunden.</p>
+</section>
+
+<section class="booking-container">
+
+<form [formGroup]="bookingForm" (ngSubmit)="submit()">
+
+  <h2>Persönliche Daten</h2>
+
+  <div class="form-row">
+    <input type="text" placeholder="Vorname" formControlName="firstName">
+    <input type="text" placeholder="Nachname" formControlName="lastName">
+  </div>
+
+  <input type="email" placeholder="E-Mail" formControlName="email">
+  <input type="tel" placeholder="Handynummer (optional)" formControlName="phone">
+
+  <h2>Aufenthalt</h2>
+
+  <select formControlName="apartment">
+    <option value="">Wohnung auswählen</option>
+    <option value="golden">Golden Twenties</option>
+    <option value="racing">Martini Racing</option>
+  </select>
+
+  <div formGroupName="dateRange" class="form-row">
+    <input type="date" formControlName="start">
+    <input type="date" formControlName="end">
+  </div>
+
+  <div class="form-row">
+    <input type="number" min="1" formControlName="adults" placeholder="Erwachsene">
+    <input type="number" min="0" formControlName="children" placeholder="Kinder">
+  </div>
+
+  <textarea rows="4" placeholder="Bemerkung (optional)" formControlName="message"></textarea>
+
+  <select formControlName="referral">
+    <option value="">Wie haben Sie uns gefunden?</option>
+    <option value="google">Google</option>
+    <option value="Booking">Booking</option>
+    <option value="Facebook">Facebook</option>
+    <option value="recommendation">Empfehlung</option>
+    <option value="other">Sonstiges</option>
+  </select>
+
+  <!-- Special Input field -->
+  <input type="text" formControlName="company" class="special-input" autocomplete="off" placeholder="Firma" style="display: none;">
+
+  <label class="checkbox">
+    <input type="checkbox" formControlName="privacy">
+    Ich habe die Datenschutzbestimmungen gelesen.
+    Ich stimme der Kontaktaufnahme zum Erfüllen der Buchungsanfrage zu.
+  </label>
+
+  <button type="submit" [disabled]="bookingForm.invalid">
+    Unverbindliche Anfrage senden
+  </button>
+
+</form>
+
+<div *ngIf="submitted" class="success">
+  Vielen Dank für Ihre Anfrage. Wir melden uns zeitnah.
+</div>
+
+</section>
+
+<app-footer></app-footer>
