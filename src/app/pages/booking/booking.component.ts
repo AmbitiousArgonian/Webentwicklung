@@ -37,24 +37,56 @@ export class BookingComponent {
 
     privacy: [false, Validators.requiredTrue],
 
+    /* Optionale Account Option */
+    createAccount: [false],
+    password: [''],
+    confirmPassword: [''],
+
+    
+
     /*verstecktes Feld welches wenn ausgefüllt das Formular nicht abschickt */
     company: ['']
   });
+
+  ngOnInit() {
+  this.bookingForm.get('createAccount')?.valueChanges.subscribe(value => {
+
+    const password = this.bookingForm.get('password');
+    const confirm = this.bookingForm.get('confirmPassword');
+
+    if (value) {
+      password?.setValidators([Validators.required, Validators.minLength(8)]);
+      confirm?.setValidators([Validators.required]);
+    } else {
+      password?.clearValidators();
+      confirm?.clearValidators();
+    }
+
+    password?.updateValueAndValidity();
+    confirm?.updateValueAndValidity();
+  });
+}
+
 
   constructor(private fb: FormBuilder) {}
 
   submit() {
 
-    if (this.bookingForm.get('company')?.value) {
-      return; // Bot erkannt, Formular wird nicht gesendet
-    }
+  if (this.bookingForm.get('company')?.value) return;
 
-    if (this.bookingForm.invalid) {
-      this.bookingForm.markAllAsTouched();
-      return;
-    }
+  const { password, confirmPassword } = this.bookingForm.value;
 
-    console.log(this.bookingForm.value);
-    this.submitted = true;
+  if (this.bookingForm.value.createAccount && password !== confirmPassword) {
+    alert('Passwörter stimmen nicht überein.');
+    return;
   }
+
+  if (this.bookingForm.invalid) {
+    this.bookingForm.markAllAsTouched();
+    return;
+  }
+
+  console.log(this.bookingForm.value);
+}
+
 }

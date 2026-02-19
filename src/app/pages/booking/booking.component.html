@@ -57,6 +57,36 @@
     Ich stimme der Kontaktaufnahme zum Erfüllen der Buchungsanfrage zu.
   </label>
 
+
+
+  <label class="checkbox">
+  <input type="checkbox" formControlName="createAccount">
+  Ich möchte ein Kundenkonto erstellen
+  </label>
+
+  <div class="account-box" *ngIf="bookingForm.get('createAccount')?.value">
+
+  <div class="account-benefits">
+    <h3>Ihre Vorteile</h3>
+    <ul>
+      <li>Buchungsstatus jederzeit einsehen</li>
+      <li>Direkte Kommunikation mit dem Gastgeber</li>
+      <li>Schnellere zukünftige Buchungen</li>
+    </ul>
+  </div>
+
+  <div class="account-fields">
+    <input type="password"
+           placeholder="Passwort (min. 8 Zeichen)"
+           formControlName="password">
+
+    <input type="password"
+           placeholder="Passwort wiederholen"
+           formControlName="confirmPassword">
+  </div>
+
+</div>
+
   <button type="submit" [disabled]="bookingForm.invalid">
     Unverbindliche Anfrage senden
   </button>
