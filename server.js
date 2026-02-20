@@ -65,7 +65,7 @@ app.post('/api/register', async (req, res) => {
 });
 
 
-*/app.post('/api/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
 
     const user = await prisma.user.findUnique({
@@ -80,7 +80,11 @@ app.post('/api/register', async (req, res) => {
     const sessionId = createSession(user.id);
     // Session‑Cookie setzen
      res.cookie('sessionId', sessionId, cookieOptions);
-      res.json({ message: 'Logged in' });
+res.json({
+  message: 'Logged in',
+  name: user.name,
+  email: user.email
+});
        });
 
 
@@ -114,6 +118,54 @@ app.get('/api/session', async (req, res) => {
 
   res.json({ loggedIn: true, name: user.name, email: user.email });
 });
+
+
+
+app.post('/api/booking', async (req, res) => {
+  const sessionId = req.cookies.sessionId;
+  const session = sessions[sessionId];
+
+  if (!session) {
+    return res.status(401).json({ message: 'Not authenticated' });
+  }
+
+  const userId = session.userId;
+
+  const {
+    apartment,
+    startDate,
+    endDate,
+    adults,
+    children,
+    message,
+    referral
+  } = req.body;
+
+  try {
+    const booking = await prisma.booking.create({
+      data: {
+        apartment,
+        startDate: new Date(startDate),
+        endDate: new Date(endDate),
+        adults,
+        children,
+        message,
+        referral,
+        userId
+      }
+    });
+
+    res.json({ message: 'Booking saved', booking });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error saving booking' });
+  }
+});
+
+
+
+
+
 
 // HAUFPTSEITE DATA
 app.get('/api/home', (req, res) => {

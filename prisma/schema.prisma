@@ -11,12 +11,19 @@ model User {
   name     String
   email    String  @unique
   password String
+  bookings Booking[]
 }
 model Booking {
-  id          String   @id @default(uuid())
-  apartmentId String
-  userId      String
-  startDate   DateTime
-  endDate     DateTime
-  createdAt   DateTime @default(now())
-}
+id String @id @default(uuid())
+ apartment String // "golden" | "racing"
+  startDate DateTime
+  endDate DateTime
+  adults Int
+   children Int?
+   message String?
+   referral String?
+   createdAt DateTime @default(now())
+   userId Int
+   user User @relation(fields: [userId], references: [id])
+    }
+

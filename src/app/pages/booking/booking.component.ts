@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { NavbarComponent } from 'src/app/core/components/navbar/navbar.component';
 import { FooterComponent } from 'src/app/core/components/footer/footer.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-booking',
@@ -14,6 +15,8 @@ import { FooterComponent } from 'src/app/core/components/footer/footer.component
 export class BookingComponent {
 
   submitted = false;
+constructor(private fb: FormBuilder, private http: HttpClient) {}
+
 
   bookingForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -68,9 +71,10 @@ export class BookingComponent {
 }
 
 
-  constructor(private fb: FormBuilder) {}
+  //constructor(private fb: FormBuilder) {}
 
-  submit() {
+ submit() {
+   console.log("SUBMIT WURDE AUSGEFÜHRT");
 
   if (this.bookingForm.get('company')?.value) return;
 
@@ -86,7 +90,21 @@ export class BookingComponent {
     return;
   }
 
-  console.log(this.bookingForm.value);
+  //console.log(this.bookingForm.value);
+
+  this.http.post('http://localhost:8000/api/booking', {
+    apartment: this.bookingForm.value.apartment,
+    startDate: this.bookingForm.value.dateRange?.start,
+    endDate: this.bookingForm.value.dateRange?.end,
+    adults: this.bookingForm.value.adults,
+    children: this.bookingForm.value.children,
+    message: this.bookingForm.value.message,
+    referral: this.bookingForm.value.referral
+  }, { withCredentials: true })
+  .subscribe(() => {
+    this.submitted = true;
+  });
+
 }
 
 }
