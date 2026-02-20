@@ -11,6 +11,9 @@
         <li><a routerLink="/golden-twenties" class="nav-link">Golden Twenties</a></li>
         <li><a routerLink="/martini-racing" class="nav-link">Martini Racing</a></li>
         <li><a routerLink="/booking" class="nav-link">Kontakt & Buchung</a></li>
+        <li *ngIf="username$ | async as username" class="nav-link username-display">
+          {{ username }}
+        </li>
       </ul>
 
       <button class="mobile-menu-btn" id="mobileMenuBtn">
