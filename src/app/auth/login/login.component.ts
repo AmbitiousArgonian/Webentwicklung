@@ -9,7 +9,9 @@ import { RouterModule } from '@angular/router';
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule,RouterModule],
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+   styleUrls: ['./login.component.css']
+
 })
 export class LoginComponent {
     email = '';       // <-- hier
@@ -22,7 +24,7 @@ export class LoginComponent {
      next: () => {
        this.error = '';
        alert('Login erfolgreich!');
- this.router.navigate(['/dashboard']);     },
+ this.router.navigate(['/home']);     },
      error: err => {
        this.error = err.error?.message || 'Login failed';
      }

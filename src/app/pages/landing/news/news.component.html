@@ -1,0 +1,41 @@
+<section class="news">
+  <div class="container">
+
+    <div class="section-header" style="text-align: center;">
+      <h2>Neuigkeiten</h2>
+      <p>Aktuelles rund um die Ferienwohnung Mondial</p>
+    </div>
+
+    <div class="news-slider"
+         (mouseenter)="onMouseEnter()"
+         (mouseleave)="onMouseLeave()">
+
+      <button class="nav-btn left" (click)="prev()">‹</button>
+
+      <div class="slider-window">
+        <div class="slider-track"
+             [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+
+          <article class="news-card"
+                   [class.visible]="i === currentIndex"
+                   *ngFor="let item of news; let i = index">
+            <div class="news-image">
+              <img [src]="item.image" [alt]="item.title">
+            </div>
+
+            <div class="news-content">
+              <span class="news-date">{{ item.date }}</span>
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.text }}</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <button class="nav-btn right" (click)="next()">›</button>
+
+    </div>
+
+  </div>
+</section>

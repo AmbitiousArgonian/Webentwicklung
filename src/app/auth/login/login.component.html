@@ -1,25 +1,60 @@
-<nav>
-    <a routerLink="/login">Login</a> |
-    <a routerLink="/register">Register</a>
-</nav>
+<!--
 
+<style> .login-wrapper {margin-top:100px; min-height: 100vh; display: flex; justify-content: center; align-items: flex-start; padding-top: 150px; background: linear-gradient(135deg, #4f46e5, #3b82f6); } .login-card { width: 100%; max-width: 420px; background: #ffffff; border-radius: 20px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); } .login-input { border-radius: 10px; padding: 10px 14px; border: 1px solid #d1d5db; transition: 0.2s; } .login-input:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25); } </style>
+<div class="auth-wrapper d-flex align-items-center justify-content-center">
+    <div class="auth-card p-4 shadow-lg rounded-4">
 
-<div class="container mt-5" style="max-width: 400px;">
-    <h2 class="mb-4">Login</h2>
+        <h2 class="text-center mb-4 fw-bold">Login</h2>
 
-    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+        <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
 
-    <form (ngSubmit)="login()">
-        <div class="mb-3">
-            <label class="form-label">E-Mail</label>
-            <input class="form-control" [(ngModel)]="email" name="email" required>
-        </div>
+        <form (ngSubmit)="login()">
+            <div class="mb-3">
+                <label class="form-label">E-Mail</label>
+                <input class="form-control modern-input" [(ngModel)]="email" name="email" required>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Passwort</label>
-            <input type="password" class="form-control" [(ngModel)]="password" name="password" required>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Passwort</label>
+                <input type="password" class="form-control modern-input" [(ngModel)]="password" name="password" required>
+            </div>
 
-        <button class="btn btn-primary w-100">Login</button>
-    </form>
+            <button class="btn btn-primary w-100 py-2 rounded-3 fw-semibold">Login</button>
+        </form>
+
+        <p class="text-center mt-3">
+            Noch kein Konto?
+            <a routerLink="/register" class="link-primary fw-semibold">Registrieren</a>
+        </p>
+
+    </div>
+</div>
+-->
+<div class="login-wrapper">
+    <div class="login-card">
+
+        <h2 class="text-center mb-4 fw-bold">Login</h2>
+
+        <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+        <form (ngSubmit)="login()">
+            <div class="mb-3">
+                <label class="form-label">E-Mail</label>
+                <input class="login-input" [(ngModel)]="email" name="email" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Passwort</label>
+                <input type="password" class="login-input" [(ngModel)]="password" name="password" required>
+            </div>
+
+            <button class="btn btn-primary w-100 py-2 rounded-3 fw-semibold">Login</button>
+        </form>
+
+        <p class="text-center mt-3">
+            Noch kein Konto?
+            <a routerLink="/register" class="link-primary fw-semibold">Registrieren</a>
+        </p>
+
+    </div>
 </div>

@@ -1,0 +1,33 @@
+<div class="calendar-wrapper">
+    <div class="calendar-header">
+        <button (click)="prevMonth()">&lt;</button>
+        <h3>{{ monthNames[currentMonth] }} {{ currentYear }}</h3>
+        <button (click)="nextMonth()">&gt;</button>
+    </div>
+
+    <div class="calendar-grid">
+        <div class="weekday" *ngFor="let w of weekDays">{{ w }}</div>
+
+        <div
+                class="day"
+                *ngFor="let day of days"
+                [ngClass]="{
+        'empty': !day.date,
+        'past': isPast(day.date),
+        'booked': isBooked(day.date),
+        'available': isAvailable(day.date),
+        'selected': isSelected(day.date),
+        'range': isInRange(day.date)
+      }"
+                (click)="selectDate(day.date)"
+        >
+            {{ day.number }}
+        </div>
+    </div>
+
+    <div class="calendar-footer">
+        <button class="btn-book" (click)="book()" [disabled]="!startDate || !endDate">
+            Jetzt buchen
+        </button>
+    </div>
+</div>
