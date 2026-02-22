@@ -141,7 +141,7 @@ app.post('/api/booking', async (req, res) => {
     referral
   } = req.body;
 
-  try {
+  /*try {
     const booking = await prisma.booking.create({
       data: {
         apartment,
@@ -153,10 +153,53 @@ app.post('/api/booking', async (req, res) => {
         referral,
         userId
       }
-    });
+    });*/
+     try {
+      let booking;
+
+      await prisma.$transaction(async (tx) => {
+       // Overlap-Check
+      const overlapping = await tx.booking.findFirst({
+      where: {
+      apartment: apartment,
+
+       AND: [
+       { startDate: { lte: new Date(endDate) } },
+       { endDate: { gte: new Date(startDate) } }
+          ]
+        }
+      });
+
+        if (overlapping) {
+        throw new Error("OVERLAP");
+        }
+
+      // Buchung speichern
+        booking = await tx.booking.create({
+         data: {
+           apartment,
+           startDate: new Date(startDate),
+           endDate: new Date(endDate),
+           adults,
+           children,
+           message,
+           referral,
+           userId
+
+             }
+           });
+        });
 
     res.json({ message: 'Booking saved', booking });
+
   } catch (err) {
+   if (err.message === "OVERLAP") {
+   return res.status(409).json({
+    message: "Diese Wohnung ist im gewählten Zeitraum bereits belegt." });
+
+  }
+
+
     console.error(err);
     res.status(500).json({ message: 'Error saving booking' });
   }

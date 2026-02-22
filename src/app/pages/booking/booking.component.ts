@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./booking.component.css']
 })
 export class BookingComponent {
+errorMessage: string | null = null;
 
   submitted = false;
 constructor(private fb: FormBuilder, private http: HttpClient) {}
@@ -101,9 +102,19 @@ constructor(private fb: FormBuilder, private http: HttpClient) {}
     message: this.bookingForm.value.message,
     referral: this.bookingForm.value.referral
   }, { withCredentials: true })
-  .subscribe(() => {
+.subscribe({
+  next: () => {
+    this.errorMessage = null;
     this.submitted = true;
-  });
+  },
+  error: err => {
+    if (err.status === 409) {
+      this.errorMessage = "Diese Wohnung ist im gewählten Zeitraum bereits belegt.";
+    } else {
+      this.errorMessage = "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.";
+    }
+  }
+});
 
 }
 
