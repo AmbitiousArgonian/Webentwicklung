@@ -1,13 +1,49 @@
+import "dotenv/config";
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import * as crypto from 'crypto';
+import bcrypt from 'bcryptjs';
 
 //import { AuthService } from './src/app/auth/auth.service';
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 console.log("Prisma DB URL:", process.env.DATABASE_URL);
+
+async function ensureAdminUser() {
+  const adminEmail = process.env.ADMIN_EMAIL || 'admin@villa-mondial.local';
+  const adminPassword = process.env.ADMIN_PASSWORD || 'admin1234';
+
+  const existing = await prisma.user.findUnique({ where: { email: adminEmail } });
+
+  if (existing) {
+    if (existing.role !== 'admin') {
+      await prisma.user.update({
+        where: { email: adminEmail },
+        data: { role: 'admin' }
+      });
+      console.log('Admin role updated for:', adminEmail);
+    } else {
+      console.log('Admin user exists:', adminEmail);
+    }
+    return;
+  }
+
+  const hashedPassword = await bcrypt.hash(adminPassword, 10);
+
+  await prisma.user.create({
+    data: {
+      name: 'Admin',
+      email: adminEmail,
+      password: hashedPassword,
+      role: 'admin'
+    }
+  });
+
+  console.log('Admin user created:', adminEmail);
+}
+
 
 const app = express();
 app.use(cors({
@@ -54,11 +90,17 @@ app.post('/api/register', async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const user = await prisma.user.create({
-      data: { name, email, password }
+      data: { name, email, password: hashedPassword }
     });
 
-    res.json({ message: 'User created', user });
+    res.json({
+      message: 'User created',
+      user: { id: user.id, name: user.name, email: user.email, role: user.role }
+    });
+
   } catch (err) {
     res.status(400).json({ message: 'Email already exists' });
   }
@@ -66,16 +108,20 @@ app.post('/api/register', async (req, res) => {
 
 
 app.post('/api/login', async (req, res) => {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
 
-    const user = await prisma.user.findUnique({
-      where: { email }
-    });
+  const user = await prisma.user.findUnique({
+    where: { email }
+  });
 
-    if (!user || user.password !== password) {
-      return res.status(400).json({ message: 'Invalid credentials' });
-    }
+  if (!user) {
+    return res.status(400).json({ message: 'Invalid credentials' });
+  }
 
+  const ok = await bcrypt.compare(password, user.password);
+  if (!ok) {
+    return res.status(400).json({ message: 'Invalid credentials' });
+  }
    // Session erstellen
     const sessionId = createSession(user.id);
     // Session‑Cookie setzen
@@ -83,7 +129,8 @@ app.post('/api/login', async (req, res) => {
 res.json({
   message: 'Logged in',
   name: user.name,
-  email: user.email
+  email: user.email,
+  role: user.role
 });
        });
 
@@ -116,7 +163,8 @@ app.get('/api/session', async (req, res) => {
 
    if (!user) { return res.json({ loggedIn: false }); }
 
-  res.json({ loggedIn: true, name: user.name, email: user.email });
+res.json({ loggedIn: true, id: user.id, name: user.name, email: user.email, role: user.role });
+
 });
 
 
@@ -223,4 +271,200 @@ app.get('/api/home', (req, res) => {
    });
 });
 
-app.listen(8000, () => console.log('Server running on http://localhost:8000'));
+// CUSTOMER: get or create conversation
+app.post('/api/chat/conversation', async (req, res) => {
+  const sessionId = req.cookies.sessionId;
+  const session = sessions[sessionId];
+
+  if (!session) {
+    return res.status(401).json({ message: 'Not authenticated' });
+  }
+
+  const userId = session.userId;
+
+  let conversation = await prisma.conversation.findFirst({
+    where: { customerId: userId }
+  });
+
+  if (!conversation) {
+    conversation = await prisma.conversation.create({
+      data: {
+        customerId: userId
+      }
+    });
+  }
+
+  res.json(conversation);
+});
+
+// CUSTOMER: send message (creates conversation if missing)
+app.post('/api/chat/messages', async (req, res) => {
+  const sessionId = req.cookies.sessionId;
+  const session = sessions[sessionId];
+
+  if (!session) {
+    return res.status(401).json({ message: 'Not authenticated' });
+  }
+
+  const userId = session.userId;
+  const { text } = req.body;
+
+  if (!text || typeof text !== 'string' || !text.trim()) {
+    return res.status(400).json({ message: 'Message text is required' });
+  }
+
+  // find or create conversation
+  let conversation = await prisma.conversation.findFirst({
+    where: { customerId: userId }
+  });
+
+  if (!conversation) {
+    conversation = await prisma.conversation.create({
+      data: { customerId: userId }
+    });
+  }
+
+  const msg = await prisma.message.create({
+    data: {
+      conversationId: conversation.id,
+      senderRole: 'customer',
+      text: text.trim()
+    }
+  });
+
+  res.json(msg);
+});
+
+
+// CUSTOMER: get my messages
+app.get('/api/chat/messages', async (req, res) => {
+  const sessionId = req.cookies.sessionId;
+  const session = sessions[sessionId];
+
+  if (!session) {
+    return res.status(401).json({ message: 'Not authenticated' });
+  }
+
+  const userId = session.userId;
+
+  const conversation = await prisma.conversation.findFirst({
+    where: { customerId: userId }
+  });
+
+  if (!conversation) {
+    return res.json([]); // no conversation yet => no messages
+  }
+
+  const messages = await prisma.message.findMany({
+    where: { conversationId: conversation.id },
+    orderBy: { createdAt: 'asc' }
+  });
+
+  res.json(messages);
+});
+
+
+// ADMIN: get all conversations
+app.get('/api/admin/chat/conversations', async (req, res) => {
+  const sessionId = req.cookies.sessionId;
+  const session = sessions[sessionId];
+
+  if (!session) {
+    return res.status(401).json({ message: 'Not authenticated' });
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { id: session.userId }
+  });
+
+  if (!user || user.role !== 'admin') {
+    return res.status(403).json({ message: 'Forbidden' });
+  }
+
+  const conversations = await prisma.conversation.findMany({
+    include: {
+      customer: {
+        select: { id: true, name: true, email: true }
+      }
+    },
+    orderBy: { createdAt: 'desc' }
+  });
+
+  res.json(conversations);
+});
+
+
+// ADMIN: get messages of a conversation
+app.get('/api/admin/chat/messages/:conversationId', async (req, res) => {
+  const sessionId = req.cookies.sessionId;
+  const session = sessions[sessionId];
+
+  if (!session) {
+    return res.status(401).json({ message: 'Not authenticated' });
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { id: session.userId }
+  });
+
+  if (!user || user.role !== 'admin') {
+    return res.status(403).json({ message: 'Forbidden' });
+  }
+
+  const { conversationId } = req.params;
+
+  const messages = await prisma.message.findMany({
+    where: { conversationId },
+    orderBy: { createdAt: 'asc' }
+  });
+
+  res.json(messages);
+});
+
+
+// ADMIN: send message to a conversation
+app.post('/api/admin/chat/messages/:conversationId', async (req, res) => {
+  const sessionId = req.cookies.sessionId;
+  const session = sessions[sessionId];
+
+  if (!session) {
+    return res.status(401).json({ message: 'Not authenticated' });
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { id: session.userId }
+  });
+
+  if (!user || user.role !== 'admin') {
+    return res.status(403).json({ message: 'Forbidden' });
+  }
+
+  const { conversationId } = req.params;
+  const { text } = req.body;
+
+  if (!text || typeof text !== 'string' || !text.trim()) {
+    return res.status(400).json({ message: 'Message text is required' });
+  }
+
+  const msg = await prisma.message.create({
+    data: {
+      conversationId,
+      senderRole: 'admin',
+      text: text.trim()
+    }
+  });
+
+  res.json(msg);
+});
+
+
+//************ */
+//app.listen(8000, () => console.log('Server running on http://localhost:8000'));
+ensureAdminUser()
+  .then(() => {
+    app.listen(8000, () => console.log('Server running on http://localhost:8000'));
+  })
+  .catch((err) => {
+    console.error('Failed to start server:', err);
+    process.exit(1);
+  });

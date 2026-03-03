@@ -10,21 +10,20 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "server": "node server.js"
   },
   "private": true,
   "dependencies": {
-    "@angular-devkit/build-angular": "^16.2.0",
     "@angular/animations": "^16.2.0",
-    "@angular/cli": "^16.2.0",
     "@angular/common": "^16.2.0",
-    "@angular/compiler":"^16.2.0",
-    "@angular/compiler-cli": "^16.2.0",
+    "@angular/compiler": "^16.2.0",
     "@angular/core": "^16.2.0",
     "@angular/forms": "^16.2.0",
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "@prisma/client": "^4.16.2",
     "bcryptjs": "^3.0.3",
     "bootstrap": "^5.3.8",
     "cookie-parser": "^1.4.7",
@@ -36,27 +35,25 @@
     "tslib": "^2.6.0",
     "zone.js": "^0.13.0"
   },
-
   "devDependencies": {
-  "@angular/cli": "^16.2.0",
-  "@angular/compiler-cli": "^16.2.0",
-  "@angular-devkit/build-angular": "^16.2.0",
-
-  "@prisma/client": "^4.16.2",
-  "@types/jasmine": "~4.3.0",
-  "@types/node": "^16.11.35",
-  "copyfiles": "^2.4.1",
-  "jasmine-core": "~4.5.0",
-  "jasmine-marbles": "~0.9.2",
-  "jasmine-spec-reporter": "~7.0.0",
-  "karma": "~6.4.0",
-  "karma-chrome-launcher": "~3.1.0",
-  "karma-coverage": "~2.2.0",
-  "karma-jasmine": "~5.1.0",
-  "karma-jasmine-html-reporter": "~2.0.0",
-  "prisma": "^4.16.2",
-  "protractor": "^7.0.0",
-  "ts-node": "^10.9.1",
-  "typescript": "~5.1.6"
-}
+    "@angular-devkit/build-angular": "^16.2.0",
+    "@angular/cli": "^16.2.0",
+    "@angular/compiler-cli": "^16.2.0",
+    "@types/jasmine": "~4.3.0",
+    "@types/node": "^16.11.35",
+    "copyfiles": "^2.4.1",
+    "jasmine-core": "~4.5.0",
+    "jasmine-marbles": "~0.9.2",
+    "jasmine-spec-reporter": "~7.0.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.0.0",
+    "postcss-loader": "^7.3.3",
+    "prisma": "^4.16.2",
+    "protractor": "^7.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "~5.1.6"
+  }
 }

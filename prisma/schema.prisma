@@ -1,29 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "sqlite"
   url      = "file:./dev.db"
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
 model User {
   id       Int     @id @default(autoincrement())
   name     String
   email    String  @unique
   password String
+  role     String  @default("customer") // "admin" | "customer"
   bookings Booking[]
+  conversations Conversation[]
 }
-model Booking {
-id String @id @default(uuid())
- apartment String // "golden" | "racing"
-  startDate DateTime
-  endDate DateTime
-  adults Int
-   children Int?
-   message String?
-   referral String?
-   createdAt DateTime @default(now())
-   userId Int
-   user User @relation(fields: [userId], references: [id])
-    }
 
+model Booking {
+  id        String   @id @default(uuid())
+  apartment String
+  startDate DateTime
+  endDate   DateTime
+  adults    Int
+  children  Int?
+  message   String?
+  referral  String?
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Conversation {
+  id         String    @id @default(uuid())
+  customerId Int
+  customer   User      @relation(fields: [customerId], references: [id])
+  status     String    @default("open") // open | closed (optional)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  messages   Message[]
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  senderRole     String       // "customer" | "admin"
+  text           String
+  createdAt      DateTime     @default(now())
+}
