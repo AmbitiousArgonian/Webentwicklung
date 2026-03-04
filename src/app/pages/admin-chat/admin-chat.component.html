@@ -1,0 +1,49 @@
+<h2>Admin Chat</h2>
+
+<div style="display:flex; gap:16px;">
+  <!-- links: conversations -->
+  <div style="width:320px;">
+    <h3>Gespräche</h3>
+
+    <div *ngIf="conversations.length === 0">Keine Gespräche vorhanden</div>
+
+    <ul>
+      <li *ngFor="let c of conversations">
+        <button type="button" (click)="selectConversation(c)">
+          {{ c.customer.name }} ({{ c.customer.email }})
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- rechts: messages -->
+  <div style="flex:1;">
+    <h3 *ngIf="selected; else noSelect">
+      Chat mit {{ selected.customer.name }}
+    </h3>
+
+    <ng-template #noSelect>
+      <div>Wähle links ein Gespräch aus.</div>
+    </ng-template>
+
+    <div *ngIf="selected">
+      <div style="border:1px solid #ddd; padding:12px; height:360px; overflow:auto; margin-bottom:12px;">
+        <div *ngFor="let m of messages" style="margin-bottom:8px;">
+          <strong>{{ m.senderRole }}:</strong> {{ m.text }}
+          <span style="opacity:.6; font-size:12px;"> ({{ m.createdAt | date:'HH:mm' }})</span>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:8px;">
+        <input
+          style="flex:1;"
+          type="text"
+          placeholder="Antwort schreiben…"
+          [(ngModel)]="replyText"
+          (keydown.enter)="sendReply()"
+        />
+        <button type="button" (click)="sendReply()">Senden</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -32,7 +32,17 @@ export const routes: Routes = [
   // Buchungsseite
    { path: 'booking', component: BookingComponent },
 
+  
+ {
+  path: 'dashboard/chat',
+  loadComponent: () =>
+    import('./pages/admin-chat/admin-chat.component')
+      .then(m => m.AdminChatComponent)
+},
+
   // todo 404 Seite
-  { path: '**', redirectTo: 'login' } 
+  { path: '**', redirectTo: 'login' }
+
+
 ];
 
