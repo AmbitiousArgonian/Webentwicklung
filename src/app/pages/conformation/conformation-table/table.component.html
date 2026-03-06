@@ -25,8 +25,7 @@
 </td>
 
 <td>
-{{ booking.adults }}
-<span *ngIf="booking.children">+{{booking.children}}</span>
+{{ booking.adults + (booking.children || 0) }} <!-- funktioniert nicht -->
 </td>
 
 <td>
