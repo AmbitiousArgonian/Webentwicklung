@@ -7,6 +7,7 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+
 model User {
   id       Int     @id @default(autoincrement())
   name     String
@@ -18,7 +19,7 @@ model User {
 }
 
 model Booking {
-  id        String   @id @default(uuid())
+  id        String        @id @default(uuid())
   apartment String
   startDate DateTime
   endDate   DateTime
@@ -26,9 +27,10 @@ model Booking {
   children  Int?
   message   String?
   referral  String?
-  createdAt DateTime @default(now())
+  status    String        @default("pending") // pending | confirmed | rejected
+  createdAt DateTime      @default(now())
   userId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  user      User          @relation(fields: [userId], references: [id])
 }
 
 model Conversation {
