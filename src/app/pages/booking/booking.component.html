@@ -60,11 +60,11 @@
 
 
   <label class="checkbox">
-  <input type="checkbox" formControlName="createAccount">
-  Ich möchte ein Kundenkonto erstellen
+  <input type="checkbox" formControlName="createAccount"> <!-- Checkbox verstecken -->
+  Ich habe noch kein Kundenkonto
   </label>
 
-  <div class="account-box" *ngIf="bookingForm.get('createAccount')?.value">
+  <div class="account-box" *ngIf="bookingForm.get('createAccount')?.value"> <!-- Todo wenn nicht angmeldet dann anzeigen -->
 
   <div class="account-benefits">
     <h3>Ihre Vorteile</h3>
