@@ -6,6 +6,7 @@ import { racingComponent } from './pages/racing/racing.component';
 import { HomeComponent } from './pages/home/home.component';
 import { goldenComponent } from './pages/golden/golden.component';
 import { BookingComponent } from './pages/booking/booking.component';
+import { ConformationPageComponent } from './pages/conformation/conformation-page/page.component';
 
 
 
@@ -31,6 +32,9 @@ export const routes: Routes = [
 
   // Buchungsseite
    { path: 'booking', component: BookingComponent },
+  
+  // Conformation Seite
+  { path: 'conformation', component: ConformationPageComponent },
 
   // todo 404 Seite
   { path: '**', redirectTo: 'login' } 
