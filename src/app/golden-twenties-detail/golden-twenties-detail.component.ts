@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BookingCalendarComponent } from '../booking-calendar/booking-calendar.component';
+import { PricingComponent } from '../core/components/preise/preise.component';
 
 @Component({
   selector: 'app-golden-twenties-detail',
@@ -9,7 +10,8 @@ import { BookingCalendarComponent } from '../booking-calendar/booking-calendar.c
   imports: [
     CommonModule,
     FormsModule,
-    BookingCalendarComponent
+    BookingCalendarComponent,
+    PricingComponent
   ],
   templateUrl: './golden-twenties-detail.component.html',
   styleUrls: ['./golden-twenties-detail.component.css']
