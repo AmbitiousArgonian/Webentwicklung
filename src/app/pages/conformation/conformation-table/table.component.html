@@ -1,0 +1,60 @@
+<table class="conformationTable">
+
+<thead>
+<tr>
+<th>Wohnung</th>
+<th>Zeitraum</th>
+<th>Gäste</th>
+<th>Kunde</th>
+<th>Anfrage</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr *ngFor="let booking of bookings"
+    (click)="select(booking)">
+
+<td>{{ booking.apartment }}</td>
+
+<td>
+{{ booking.startDate | date:'dd.MM' }}
+-
+{{ booking.endDate | date:'dd.MM' }}
+</td>
+
+<td>
+{{ booking.adults + (booking.children || 0) }} <!-- funktioniert nicht -->
+</td>
+
+<td>
+{{ booking.user.firstName }}
+{{ booking.user.lastName }}
+</td>
+
+<td>
+{{ booking.createdAt | date:'dd.MM.yy' }}
+</td>
+
+<td>
+
+<span class="status pending" *ngIf="booking.status === 'PENDING'">
+Offen
+</span>
+
+<span class="status confirmed" *ngIf="booking.status === 'CONFIRMED'">
+Bestätigt
+</span>
+
+<span class="status declined" *ngIf="booking.status === 'DECLINED'">
+Abgelehnt
+</span>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>

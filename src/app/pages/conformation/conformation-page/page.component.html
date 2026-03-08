@@ -1,0 +1,31 @@
+<section class="admin-container">
+
+<h1>Buchungsanfragen</h1>
+
+<div class="admin-controls">
+
+<select [(ngModel)]="filter">
+  <option value="ALL">Alle</option>
+  <option value="PENDING">Offene Anfragen</option>
+  <option value="CONFIRMED">Bestätigt</option>
+</select>
+
+<select [(ngModel)]="sort">
+  <option value="CREATED">Zeitpunkt Anfrage</option>
+  <option value="ARRIVAL">Zeitpunkt Anreise</option>
+</select>
+
+</div>
+
+<conformation-table
+  [bookings]="bookings"
+  (selectBooking)="selectBooking($event)">
+</conformation-table>
+
+<app-conformation-card
+  *ngIf="selectedBooking"
+  [booking]="selectedBooking"
+  (close)="closeDetail()">
+</app-conformation-card>
+
+</section>
