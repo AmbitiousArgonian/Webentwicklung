@@ -6,7 +6,8 @@ import { Booking } from 'src/app/core/models/booking.model';
   selector: 'conformation-table',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './table.component.html'
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.css']
 })
 export class ConformationTableComponent {
 
