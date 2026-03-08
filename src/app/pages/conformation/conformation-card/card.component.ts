@@ -6,7 +6,8 @@ import { Booking } from 'src/app/core/models/booking.model';
   selector: 'app-conformation-card',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './card.component.html'
+  templateUrl: './card.component.html',
+  styleUrls: ['./card.component.css']
 })
 export class ConformationCardComponent {
 
