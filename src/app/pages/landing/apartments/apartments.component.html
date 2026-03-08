@@ -12,6 +12,7 @@
         class="apartment-card"
         *ngFor="let apartment of apartments; let i = index"
         [class.visible]="visibleCards[i]"
+        [routerLink]="'/' + apartment.route"
         (mouseenter)="onHover(i, $event)"
         (mouseleave)="onLeave(i)"
       >
@@ -22,11 +23,6 @@
         <div class="card-content">
           <h3>{{ apartment.title }}</h3>
           <p>{{ apartment.description }}</p>
-          <!--Link to detailed apartment page once routing is set up
-           <a class="card-link" routerLink="/{{ apartment.route }}">
-            
-            Mehr erfahren
-          </a> -->
         </div>
       </div>
 
