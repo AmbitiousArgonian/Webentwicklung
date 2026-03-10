@@ -23,7 +23,7 @@ export class LoginComponent {
    this.auth.login(this.email, this.password).subscribe({
      next: () => {
        this.error = '';
-       alert('Login erfolgreich!');
+      // alert('Login erfolgreich!');
  this.router.navigate(['/home']);     },
      error: err => {
        this.error = err.error?.message || 'Login failed';

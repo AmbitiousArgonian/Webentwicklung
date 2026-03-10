@@ -1,5 +1,41 @@
   <!-- Navigation bar -->
-<header class="header" [class.scrolled]="isScrolled" id="header">
+  <!-- User Booking Modal -->
+  <div class="modal fade" id="userBookingModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 450px;">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Ihre Buchungen</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <div *ngIf="loadingBookings">Lade Buchungen...</div>
+
+          <div *ngIf="!loadingBookings && bookings.length === 0">
+            Keine Buchungen gefunden.
+          </div>
+
+          <ul *ngIf="!loadingBookings && bookings.length > 0" class="list-group">
+            <li *ngFor="let b of bookings" class="list-group-item">
+              <strong>{{ b.apartment }}</strong><br>
+              {{ b.startDate | date }} – {{ b.endDate | date }}<br>
+              Erwachsene: {{ b.adults }}, Kinder: {{ b.children }}
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <header class="header" [class.scrolled]="isScrolled" id="header">
+
+
   <div class="container">
     <nav class="navbar">
       <div class="logo">
@@ -11,7 +47,15 @@
         <li><a routerLink="/golden-twenties" class="nav-link">Golden Twenties</a></li>
         <li><a routerLink="/martini-racing" class="nav-link">Martini Racing</a></li>
         <li><a routerLink="/booking" class="nav-link">Kontakt & Buchung</a></li>
-        <li *ngIf="username$ | async as username" class="nav-link username-display d-flex align-items-center gap-2">
+<!--        <li *ngIf="username$ | async as username" class="nav-link username-display d-flex align-items-center gap-2">-->
+<!--          <i class="bi bi-person-circle"></i>-->
+<!--          {{ username }}-->
+<!--        </li>-->
+        <li *ngIf="username$ | async as username"
+            class="nav-link username-display d-flex align-items-center gap-2"
+            style="cursor: pointer;"
+            (click)="openUserBookings()">
+
           <i class="bi bi-person-circle"></i>
           {{ username }}
         </li>

@@ -42,11 +42,38 @@ function createSession(userId) {
 
 const cookieOptions = {
  httpOnly: true,
- secure: false, // bei HTTPS auf true setzen
- sameSite: 'lax',
+ secure: true,
+ sameSite: 'none',
   maxAge: 90 * 60 * 1000, // 90 Minuten
  path: '/'
   };
+
+app.use('/api/my-bookings', (req, res, next) => {
+  res.set('Cache-Control', 'no-store');
+  next();
+});
+
+app.get('/api/my-bookings', async (req, res) => {
+  const sessionId = req.cookies.sessionId;
+  const session = sessions[sessionId];
+
+  if (!session) {
+    return res.status(401).json({ message: 'Not authenticated' });
+  }
+
+  try {
+    const bookings = await prisma.booking.findMany({
+      where: { userId: session.userId },
+      orderBy: { startDate: 'asc' }
+    });
+
+    res.json(bookings);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error loading bookings' });
+  }
+});
+
 
 
 
@@ -204,8 +231,6 @@ app.post('/api/booking', async (req, res) => {
     res.status(500).json({ message: 'Error saving booking' });
   }
 });
-
-
 
 
 

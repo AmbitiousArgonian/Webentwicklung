@@ -37,15 +37,27 @@ export class BookingCalendarComponent {
 
   ngOnInit() {
     this.loadBookings();
-    this.generateCalendar();
+   // this.generateCalendar();
   }
 
   loadBookings() {
-    this.bookingService.getBookings("APARTMENT_1").subscribe((bookings: any[]) => {
-      this.bookedRanges = bookings.map((b: any) => ({
-        start: new Date(b.startDate),
-        end: new Date(b.endDate)
-      }));
+   // this.bookingService.getBookings("APARTMENT_1").subscribe((bookings: any[]) => {
+this.bookingService.getBookings().subscribe((bookings: any[]) => {
+
+      this.bookedRanges = bookings.map((b: any) => {
+        const start = new Date(b.startDate);
+        const end = new Date(b.endDate);
+
+        // Zeiten normalisieren
+        start.setHours(0, 0, 0, 0);
+        end.setHours(0, 0, 0, 0);
+
+        return { start, end };
+      });
+
+      this.generateCalendar();
+      console.log("bookedRanges:", this.bookedRanges);
+
     });
   }
 

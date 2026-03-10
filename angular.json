@@ -45,7 +45,7 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": { "browserTarget": "Webentwicklung:build" },
+          "options": { "browserTarget": "Webentwicklung:build", "proxyConfig": "proxy.conf.cjs" },
           "configurations": {
             "production": { "browserTarget": "Webentwicklung:build:production" },
             "development": { "browserTarget": "Webentwicklung:build:development" }
@@ -63,7 +63,9 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.css"],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           }
         },
         "e2e": {

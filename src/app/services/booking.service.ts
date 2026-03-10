@@ -7,13 +7,25 @@ import { Observable } from 'rxjs';
 })
 export class BookingService {
 
-  private api = 'http://localhost:3000/bookings';
-
+ // private api = 'http://localhost:8000/bookings';
+ private api = '/api/bookings';
   constructor(private http: HttpClient) {}
 
-  getBookings(apartmentId: string): Observable<any[]> {
+ /*  getBookings(apartmentId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.api}/${apartmentId}`);
-  }
+     withCredentials: true
+  } */
+/* getBookings() {
+  return this.http.get<any[]>(`http://localhost:8000/api/my-bookings`, {
+    withCredentials: true
+  });
+} */
+getBookings() {
+  return this.http.get<any[]>('/api/my-bookings', {
+    withCredentials: true
+  });
+}
+
 
   createBooking(booking: any): Observable<any> {
     return this.http.post<any>(this.api, booking);
