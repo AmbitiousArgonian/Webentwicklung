@@ -20,15 +20,16 @@ export class NewsComponent implements OnInit, OnDestroy {
     {
       title: 'Traumschleifen direckt vor der Haustür',
       text: 'Erleben sie die Premiumwanderwege des Saarlandes. Für Tagestouren ausgelegt, top gepflegt und gut beschildert.',
-      date: 'Januar 2026',
+      date: 'Februar 2026',
       image: 'assets/Landschaft.jpg'
-    },
-    {
-      title: 'Hier könnte ihre Werbung stehen',
-      text: 'Wirklich, das hier ist Freitext der in Produktivbetrieb mit was sinnvollen gefüllt wird.',
-      date: 'November 1987',
-      image: 'assets/Werbung.jpg'
     }
+    // ,
+    // {
+    //   title: 'Template für weitere News',
+    //   text: 'Wirklich, das hier ist Freitext der in Produktivbetrieb mit was sinnvollen gefüllt wird.',
+    //   date: 'November 1987',
+    //   image: 'assets/Werbung.jpg'
+    // }
   ];
 
   currentIndex = 0;

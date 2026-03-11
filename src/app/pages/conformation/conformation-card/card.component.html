@@ -1,0 +1,54 @@
+<div class="booking-detail">
+
+<button class="close-btn" (click)="close.emit()">✕</button>
+
+<h2>{{ booking.apartment }}</h2>
+
+<p>
+<strong>Zeitraum:</strong>
+{{ booking.startDate | date }}
+-
+{{ booking.endDate | date }}
+</p>
+
+<p>
+<strong>Gäste:</strong>
+{{ booking.adults }} Erwachsene
+<span *ngIf="booking.children">
+, {{ booking.children }} Kinder
+</span>
+</p>
+
+<p>
+<strong>Kunde:</strong>
+{{ booking.user.firstName }} {{ booking.user.lastName }}
+</p>
+
+<p>
+<strong>Email:</strong>
+{{ booking.user.email }}
+</p>
+
+<p *ngIf="booking.message">
+<strong>Nachricht:</strong>
+{{ booking.message }}
+</p>
+
+<p *ngIf="booking.referral">
+<strong>Gefunden über:</strong>
+{{ booking.referral }}
+</p>
+
+<div class="actions">
+
+<button class="confirm">
+Buchung bestätigen
+</button>
+
+<button class="decline">
+Ablehnen
+</button>
+
+</div>
+
+</div>
