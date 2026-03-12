@@ -17,13 +17,35 @@
             Keine Buchungen gefunden.
           </div>
 
-          <ul *ngIf="!loadingBookings && bookings.length > 0" class="list-group">
+       <!--   <ul *ngIf="!loadingBookings && bookings.length > 0" class="list-group">
             <li *ngFor="let b of bookings" class="list-group-item">
               <strong>{{ b.apartment }}</strong><br>
               {{ b.startDate | date }} – {{ b.endDate | date }}<br>
               Erwachsene: {{ b.adults }}, Kinder: {{ b.children }}
             </li>
+          </ul>-->
+          <ul *ngIf="!loadingBookings && bookings.length > 0" class="list-group">
+            <li *ngFor="let b of bookings" class="list-group-item">
+
+              <strong>{{ b.apartment }}</strong><br>
+              {{ b.startDate | date }} – {{ b.endDate | date }}<br>
+              Erwachsene: {{ b.adults }}, Kinder: {{ b.children }}
+
+              <br>
+
+              <!-- STATUS BADGE -->
+              <span class="badge"
+                    [ngClass]="{
+            'bg-warning text-dark': b.status === 'PENDING',
+            'bg-success': b.status === 'CONFIRMED',
+            'bg-danger': b.status === 'DECLINED'
+          }">
+      {{ b.status }}
+    </span>
+
+            </li>
           </ul>
+
 
         </div>
 
