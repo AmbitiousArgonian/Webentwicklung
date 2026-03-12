@@ -9,13 +9,22 @@
   </div>
 
   <div class="chat-body">
-    <div class="msg msg--bot">
+    <div class="msg msg--bot" *ngIf="messages.length === 0">
       Hi! 👋 Schreib uns deine Frage zur Ferienwohnung.
+    </div>
+
+    <div
+      class="msg"
+      *ngFor="let m of messages"
+      [ngClass]="m.senderRole === 'customer' ? 'msg--me' : 'msg--bot'"
+    >
+      {{ m.text }}
+      <div class="msg-time">{{ m.createdAt | date:'HH:mm' }}</div>
     </div>
   </div>
 
   <div class="chat-hint" *ngIf="justSent">
-    WhatsApp wurde geöffnet ✅
+    Nachricht gesendet ✅
   </div>
 
   <div class="chat-footer">
