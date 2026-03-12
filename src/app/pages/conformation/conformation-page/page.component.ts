@@ -4,6 +4,7 @@ import { Booking } from 'src/app/core/models/booking.model';
 import { ConformationTableComponent } from '../conformation-table/table.component';
 import { ConformationCardComponent } from '../conformation-card/card.component';
 import { FormsModule } from '@angular/forms';
+import { BookingService } from 'src/app/services/booking.service';
 
 @Component({
   selector: 'confirmation-page',
@@ -11,6 +12,9 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, ConformationTableComponent, ConformationCardComponent, FormsModule],
   templateUrl: './page.component.html'
 })
+
+
+/*
 export class ConformationPageComponent {
 
    bookings: Booking[] = [ //Testdaten
@@ -64,4 +68,36 @@ export class ConformationPageComponent {
     this.selectedBooking = null;
   }
 
+}
+ */
+
+export class ConformationPageComponent {
+
+  bookings: Booking[] = [];
+  selectedBooking: Booking | null = null;
+
+  filter = 'ALL';
+  sort = 'CREATED';
+
+  constructor(private bookingService: BookingService) {}
+
+  ngOnInit() {
+    this.loadBookings();
+  }
+
+  loadBookings() {
+    this.bookingService.getAdminBookings().subscribe({
+next: (data: Booking[]) => this.bookings = data,
+error: (err: any) => console.error('Fehler beim Laden der Buchungen', err)
+
+    });
+  }
+
+  selectBooking(booking: Booking) {
+    this.selectedBooking = booking;
+  }
+
+  closeDetail() {
+    this.selectedBooking = null;
+  }
 }

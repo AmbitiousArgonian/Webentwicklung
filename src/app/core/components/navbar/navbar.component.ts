@@ -51,6 +51,8 @@ export class NavbarComponent implements OnInit {
           this.bookings = data;
           this.loadingBookings = false;
 
+          this.cdr.markForCheck();   // ← WICHTIG!
+
           const modalEl = document.getElementById('userBookingModal');
           if (modalEl) {
             const modal = new Modal(modalEl);
@@ -59,9 +61,11 @@ export class NavbarComponent implements OnInit {
         },
         error: () => {
           this.loadingBookings = false;
+          this.cdr.markForCheck();   // ← auch hier
         }
       });
   }
+
 
   loadSession(): void {
     fetch('http://localhost:8000/api/session', {

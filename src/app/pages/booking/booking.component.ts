@@ -20,7 +20,7 @@ constructor(private fb: FormBuilder, private http: HttpClient) {}
 
 
   bookingForm = this.fb.group({
-    firstName: ['', Validators.required],
+   name: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     phone: [''],

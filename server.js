@@ -76,13 +76,15 @@ function createSession(userId) {
   return sessionId;
 }
 
+
 const cookieOptions = {
- httpOnly: true,
- secure: true,
- sameSite: 'none',
-  maxAge: 90 * 60 * 1000, // 90 Minuten
- path: '/'
-  };
+  httpOnly: true,
+  secure: false,     // ← MUSS bei localhost false sein
+  sameSite: 'lax',   // ← MUSS bei localhost lax sein
+  maxAge: 90 * 60 * 1000,
+  path: '/'
+};
+
 
 app.use('/api/my-bookings', (req, res, next) => {
   res.set('Cache-Control', 'no-store');
@@ -194,6 +196,7 @@ res.json({ loggedIn: true, id: user.id, name: user.name, email: user.email, role
 
 });
 
+/*
 
 
 app.post('/api/booking', async (req, res) => {
@@ -216,19 +219,6 @@ app.post('/api/booking', async (req, res) => {
     referral
   } = req.body;
 
-  /*try {
-    const booking = await prisma.booking.create({
-      data: {
-        apartment,
-        startDate: new Date(startDate),
-        endDate: new Date(endDate),
-        adults,
-        children,
-        message,
-        referral,
-        userId
-      }
-    });*/
      try {
       let booking;
 
@@ -279,8 +269,111 @@ app.post('/api/booking', async (req, res) => {
     res.status(500).json({ message: 'Error saving booking' });
   }
 });
+*/
+
+app.post('/api/booking', async (req, res) => {
+  const sessionId = req.cookies.sessionId;
+  const session = sessions[sessionId];
+
+  if (!session) {
+    return res.status(401).json({ message: 'Not authenticated' });
+  }
+
+  const userId = session.userId;
+
+  const {
+    apartment,
+    startDate,
+    endDate,
+    adults,
+    children,
+    message,
+    referral
+  } = req.body;
+
+  try {
+    const booking = await prisma.booking.create({
+      data: {
+        apartment,
+        startDate: new Date(startDate),
+        endDate: new Date(endDate),
+        adults,
+        children,
+        message,
+        referral,
+        userId,
+        status: "PENDING"   // <<< WICHTIG
+      }
+    });
+
+    res.json({ message: 'Anfrage gesendet', booking });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error saving booking' });
+  }
+});
 
 
+
+app.post('/api/booking/:id/confirm', async (req, res) => {
+  try {
+    const booking = await prisma.booking.update({
+      where: { id: req.params.id },
+      data: { status: "CONFIRMED" }
+    });
+
+    res.json({ message: "Buchung bestätigt", booking });
+  } catch (err) {
+    res.status(500).json({ message: "Error confirming booking" });
+  }
+});
+
+
+app.post('/api/booking/:id/decline', async (req, res) => {
+  try {
+    const booking = await prisma.booking.update({
+      where: { id: req.params.id },
+      data: { status: "DECLINED" }
+    });
+
+    res.json({ message: "Buchung abgelehnt", booking });
+  } catch (err) {
+    res.status(500).json({ message: "Error declining booking" });
+  }
+});
+
+app.get('/api/admin/bookings', async (req, res) => {
+  const sessionId = req.cookies.sessionId;
+  const session = sessions[sessionId];
+
+  if (!session) {
+    return res.status(401).json({ message: 'Not authenticated' });
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { id: session.userId }
+  });
+
+  if (user.role !== "admin") {
+    return res.status(403).json({ message: "Forbidden" });
+  }
+
+  try {
+    const bookings = await prisma.booking.findMany({
+      orderBy: { createdAt: "desc" },
+      include: {
+        user: true
+      }
+    });
+
+    res.json(bookings);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error loading bookings" });
+  }
+});
 
 
 // HAUFPTSEITE DATA

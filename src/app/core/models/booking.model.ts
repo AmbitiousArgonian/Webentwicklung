@@ -17,7 +17,7 @@ export interface Booking {
   createdAt: Date;
 
   user: {
-    firstName: string;
+   name: string;
     lastName: string;
     email: string;
   };

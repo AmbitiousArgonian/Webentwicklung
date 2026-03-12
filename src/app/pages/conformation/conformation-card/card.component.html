@@ -21,7 +21,7 @@
 
 <p>
 <strong>Kunde:</strong>
-{{ booking.user.firstName }} {{ booking.user.lastName }}
+{{ booking.user.name }} {{ booking.user.lastName }}
 </p>
 
 <p>
@@ -41,13 +41,15 @@
 
 <div class="actions">
 
-<button class="confirm">
-Buchung bestätigen
-</button>
+    <button class="confirm" (click)="confirmBooking()">
+        Buchung bestätigen
+    </button>
 
-<button class="decline">
-Ablehnen
-</button>
+    <button class="decline" (click)="declineBooking()">
+        Ablehnen
+    </button>
+
+
 
 </div>
 
