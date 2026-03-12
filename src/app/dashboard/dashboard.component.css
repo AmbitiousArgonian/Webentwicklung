@@ -1,0 +1,56 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f6f6f4;
+  color: #1c1c1c;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-page {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 32px 40px 40px;
+}
+
+.dashboard-header {
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(198, 167, 94, 0.22);
+}
+
+.dashboard-label {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c6a75e;
+}
+
+.dashboard-header h1 {
+  margin: 0 0 8px;
+  font-size: 40px;
+  font-weight: 700;
+  color: #1c1c1c;
+}
+
+.dashboard-header p {
+  margin: 0;
+  font-size: 16px;
+  color: #5a5757;
+}
+
+.dashboard-main {
+  min-height: 600px;
+}
+
+@media (max-width: 900px) {
+  .dashboard-page {
+    padding: 20px 16px 24px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 32px;
+  }
+}

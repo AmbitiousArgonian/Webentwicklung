@@ -28,4 +28,6 @@ export class MartiniRacingComponent {
       this.currentImage = this.images[this.currentIndex];
     }, 4000);
   }
+
+
 }
