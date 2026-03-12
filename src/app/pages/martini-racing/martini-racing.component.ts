@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChatWidgetComponent } from '../../shared/chat-widget/chat-widget.component';
+import { PricingComponent } from '../../core/components/preise/preise.component';
 
 
 @Component({
   selector: 'app-martini-racing',
   standalone: true,
-  imports: [CommonModule, ChatWidgetComponent],
+  imports: [CommonModule, ChatWidgetComponent, PricingComponent],
   templateUrl: './martini-racing.component.html',
   styleUrls: ['./martini-racing.component.css']
 })
@@ -28,4 +29,6 @@ export class MartiniRacingComponent {
       this.currentImage = this.images[this.currentIndex];
     }, 4000);
   }
+
+
 }

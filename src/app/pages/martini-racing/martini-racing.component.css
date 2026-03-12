@@ -1,261 +1,360 @@
-/* =========================
-   Martini Racing – Design Tokens
-   ========================= */
 :host {
-  --text-on-dark: #ffffff;
-  --text: #1a1a1a;
-  --muted: #4b5563;
+  --bg: #f5f3ef;
+  --surface: #f3f1ec;
+  --text: #2f2a25;
+  --muted: #4f4a44;
+  --light: #ffffff;
+  --overlay: rgba(0, 0, 0, 0.34);
+  --border: rgba(0, 0, 0, 0.08);
 
-  --bg: #ffffff;
-  --surface: #ffffff;
-  --surface-soft: #f4f6f9;
-  --border: #e6e6e6;
-
-  --accent-blue: #1e3a5f;
-  --accent-red: #e63946;
-
-  --radius-sm: 10px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-
-  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 14px 34px rgba(0, 0, 0, 0.10);
-
-  --container: 1100px;
-  --pad-x: 2rem;
+  display: block;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
 }
 
-/* =========================
-   Hero (Blurred Background)
-   ========================= */
+/* HERO */
 .hero {
   position: relative;
-  min-height: 70vh;
+  min-height: 78vh;
   display: flex;
   align-items: center;
-  padding: 4rem var(--pad-x);
-  color: var(--text-on-dark);
+  justify-content: center;
+  text-align: center;
+  padding: 7rem 1.5rem 5rem;
+  color: var(--light);
   overflow: hidden;
 }
 
-/* Unscharfer Hintergrund */
 .hero__bg {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-    url('/assets/images/martini-racing/sitzbereich.jpg');
-  background-size: cover;
-  background-position: center;
-  filter: blur(10px);
-  transform: scale(1.08);
+  background:
+    linear-gradient(var(--overlay), var(--overlay)),
+    url('/assets/images/martini-racing/sitzbereich.jpg') center/cover no-repeat;
   z-index: 0;
 }
 
-/* Scharfer Inhalt */
 .hero__inner {
   position: relative;
   z-index: 1;
-  max-width: 900px;
+  max-width: 920px;
 }
 
 .hero__kicker {
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  margin: 0 0 1.2rem;
   font-size: 0.9rem;
-  opacity: 0.85;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.96);
 }
 
 .hero h1 {
-  font-size: 3rem;
-  line-height: 1.1;
-  margin: 0.5rem 0;
+  margin: 0 0 1.2rem;
+  font-size: clamp(3.4rem, 6vw, 5.4rem);
+  line-height: 1.05;
+  font-weight: 400;
+  color: #ffffff;
 }
 
 .hero__subtitle {
-  font-size: 1.15rem;
-  max-width: 600px;
-  margin-bottom: 2rem;
-  opacity: 0.95;
+  margin: 0 auto 2rem;
+  max-width: 760px;
+  font-size: 1rem;
+  line-height: 1.45;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  display: none;
 }
 
-/* =========================
-   Buttons
-   ========================= */
-.btn {
-  padding: 0.85rem 1.6rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 650;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
-}
-
-.btn--primary {
-  color: var(--text-on-dark);
-  background: linear-gradient(135deg, var(--accent-blue), #2b6cb0);
-  box-shadow: var(--shadow-sm);
-}
-
-.btn--primary:hover {
-  box-shadow: var(--shadow-lg);
-}
-
-.btn--ghost {
-  color: var(--text-on-dark);
-  border: 2px solid rgba(255,255,255,0.9);
-  background: transparent;
-}
-
-.btn--ghost:hover {
-  background: rgba(255,255,255,0.12);
-}
-
-/* =========================
-   Hero Facts
-   ========================= */
 .hero__facts {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 1rem 1.5rem;
+  gap: 2.5rem;
   list-style: none;
   padding: 0;
-  margin: 1rem 0 0;
+  margin: 0;
 }
 
-/* =========================
-   Sections
-   ========================= */
+.hero__facts li {
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* GENERIC SECTION */
 .section {
-  padding: 3rem var(--pad-x);
-  max-width: var(--container);
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 6rem 2rem;
+}
+
+.section h2 {
+  margin: 0 0 2rem;
+  text-align: center;
+  font-size: clamp(2.6rem, 4vw, 4rem);
+  line-height: 1.1;
+  font-weight: 400;
   color: var(--text);
 }
 
 .section p {
+  margin: 0 auto;
+  max-width: 1120px;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
   color: var(--muted);
-  line-height: 1.7;
 }
 
-/* Über das Motiv – Card-Style */
+/* ABOUT */
 .section--about {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 6px solid var(--accent-blue);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
-  padding: 2rem;
-  margin-top: 2rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  margin-top: 0;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
 }
 
-/* Ausstattung – eingebetteter Bereich */
-.section--equip {
-  background: var(--surface-soft);
-  border-radius: var(--radius-lg);
-  padding: 3rem 2.5rem;
-  margin-top: 3rem;
+/* AMENITIES - wie Golden */
+.amenities {
+  max-width: 1100px;
+  margin: 6rem auto;
+  padding: 0 2rem;
 }
 
-.section--equip h2 {
-  font-weight: 650;
+.amenities-title {
+  text-align: center;
+  font-size: 2.2rem;
   margin-bottom: 2rem;
+  font-weight: 400;
+  color: var(--text);
 }
 
-/* =========================
-   Grid & Cards
-   ========================= */
-.grid {
+.amenities-subtitle {
+  font-size: 1.4rem;
+  margin: 2rem 0 1rem;
+  color: #444;
+  text-align: center;
+  font-weight: 400;
+}
+
+.amenities-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 1.25rem 2.5rem;
+  align-items: start;
 }
 
-.card {
-  padding: 1.5rem;
-  border-radius: var(--radius-sm);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 6px solid var(--accent-blue);
-  box-shadow: var(--shadow-sm);
-  transition: transform 180ms ease, box-shadow 180ms ease, border-left-color 180ms ease;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-left-color: var(--accent-red);
-}
-
-/* =========================
-   Slideshow
-   ========================= */
-.slideshow {
-  padding: 3rem var(--pad-x);
+.amenity {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  color: #222;
+  line-height: 1.4;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.amenity span {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+  opacity: 0.9;
+}
+
+.hidden {
+  display: none;
+}
+
+.more-btn {
+  margin-top: 20px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 15px;
+  color: #0066cc;
+  cursor: pointer;
+}
+
+/* falls alte Struktur noch irgendwo im HTML steht */
+.section--equip,
+.grid,
+.card,
+.card:hover,
+.section-header {
+  all: unset;
+  display: revert;
+}
+
+/* SLIDESHOW */
+.slideshow {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem 4rem;
 }
 
 .slideshow-frame {
   width: 100%;
-  max-width: var(--container);
-  height: 500px;
+  height: 560px;
   overflow: hidden;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  background: #0b1c2d;
+  border-radius: 0;
+  background: #ddd;
+  box-shadow: none;
 }
 
 .slideshow-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
-/* =========================
-   CTA
-   ========================= */
+/* CTA */
 .section--cta {
   text-align: center;
-  background: #0b1c2d;
-  color: var(--text-on-dark);
-  border-radius: var(--radius-lg);
-  max-width: var(--container);
-  margin: 3rem auto;
-  padding: 3rem 2rem;
+  background: transparent;
+  color: var(--text);
+  border-radius: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  padding-bottom: 6rem;
+  box-shadow: none;
 }
 
-/* =========================
-   Responsive
-   ========================= */
-@media (max-width: 640px) {
+.section--cta p {
+  text-align: center;
+  max-width: 700px;
+  margin-bottom: 1.6rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.6rem;
+  text-decoration: none;
+  border-radius: 999px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.btn--primary {
+  background: #1f4d86;
+  color: #ffffff;
+  border: none;
+}
+
+.btn--primary:hover {
+  opacity: 0.92;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
   .hero {
-    padding: 3rem 1.25rem;
+    min-height: 68vh;
+    padding: 6rem 1.2rem 4rem;
   }
 
   .hero h1 {
-    font-size: 2.25rem;
+    font-size: 3.4rem;
+  }
+
+  .hero__facts {
+    gap: 1.4rem;
   }
 
   .section {
-    padding: 2.25rem 1.25rem;
+    padding: 4rem 1.4rem;
+  }
+
+  .amenities-list {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+
+  .slideshow {
+    padding: 1rem 1.4rem 3rem;
   }
 
   .slideshow-frame {
-    height: 320px;
+    height: 420px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: 62vh;
+    padding: 5.5rem 1rem 3rem;
   }
 
-  .section--equip {
-    padding: 2.25rem 1.25rem;
+  .hero__kicker {
+    font-size: 0.76rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero__subtitle {
+    font-size: 0.96rem;
+  }
+
+  .hero__facts {
+    gap: 0.9rem 1.2rem;
+  }
+
+  .hero__facts li {
+    font-size: 0.88rem;
+  }
+
+  .section {
+    padding: 3rem 1rem;
+  }
+
+  .section h2 {
+    font-size: 2.3rem;
+  }
+
+  .amenities {
+    margin: 4rem auto;
+    padding: 0 1rem;
+  }
+
+  .amenities-title {
+    font-size: 2rem;
+  }
+
+  .amenities-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .amenities-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .slideshow-frame {
+    height: 280px;
   }
 }
