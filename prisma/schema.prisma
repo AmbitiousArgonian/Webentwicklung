@@ -11,6 +11,7 @@ datasource db {
 model User {
   id       Int     @id @default(autoincrement())
   name     String
+  lastName String
   email    String  @unique
   password String
   role     String  @default("customer") // "admin" | "customer"
@@ -27,7 +28,7 @@ model Booking {
   children  Int?
   message   String?
   referral  String?
-  status    String        @default("pending") // pending | confirmed | rejected
+  status    String        @default("PENDING") // pending | confirmed | rejected
   createdAt DateTime      @default(now())
   userId    Int
   user      User          @relation(fields: [userId], references: [id])

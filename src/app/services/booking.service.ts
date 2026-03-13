@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Booking } from '../core/models/booking.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,13 @@ getBookings() {
     withCredentials: true
   });
 }
+getAdminBookings() {
+  return this.http.get<Booking[]>('http://localhost:8000/api/admin/bookings', {
+    withCredentials: true
+  });
+}
+
+
 
 
   createBooking(booking: any): Observable<any> {
