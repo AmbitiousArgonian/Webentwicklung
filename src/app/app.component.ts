@@ -28,9 +28,11 @@ export class AppComponent implements OnInit {
     }).subscribe({
       next: (res) => {
         this.userRole = res.role ?? null;
+        this.updateChatVisibility(this.router.url);
       },
       error: () => {
         this.userRole = null;
+        this.updateChatVisibility(this.router.url);
       }
     });
 
@@ -46,6 +48,13 @@ export class AppComponent implements OnInit {
   }
 
   private updateChatVisibility(url: string) {
-    this.hideChat = url.startsWith('/admin');
-  }
+  const isHiddenRoute =
+    url.startsWith('/login') ||
+    url.startsWith('/register') ||
+    url.startsWith('/dashboard');
+
+  const isAdmin = this.userRole === 'admin';
+
+  this.hideChat = isHiddenRoute || isAdmin;
+}
 }
